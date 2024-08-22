@@ -50,9 +50,7 @@ class _SingInScreenState extends State<SingInScreen> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Form submitted successfully')),
-      );
+      Navigator.pushNamed(context, "/Home");
     } else {
       _emailFocusNode.requestFocus();
     }
@@ -105,7 +103,7 @@ class _SingInScreenState extends State<SingInScreen> {
                 alignment: Alignment.center,
                 child: InkWell(
                     child: Text("Forgot password?",
-                        style: AppTextStyles.largeText)),
+                        style: AppTextStyles.authScreenDetailsText)),
               ),
               const SizedBox(height: 20),
               TwoTextLastClickabel(

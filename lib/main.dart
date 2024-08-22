@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/views/auth/sing_in_screen.dart';
 import 'package:netflixclone/views/auth/sing_up_screen.dart';
+import 'package:netflixclone/views/home/home_screen.dart';
 import 'package:netflixclone/views/splash_screen.dart';
 
 void main() {
@@ -23,11 +24,12 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Colors.black,
       ),
-      initialRoute: '/',
+      initialRoute: '/Home',
       routes: {
-        '/': (context) => const SplashScreen(),
+        '/SP': (context) => const SplashScreen(),
         '/SingIn': (context) => const SingInScreen(),
         '/SingUp': (context) => const SingUpScreen(),
+        '/Home': (context) => const HomeScreen(),
       },
     );
   }

@@ -6,5 +6,6 @@ class AppTextStyles {
 
   static const TextStyle largeTitle = TextStyle(fontSize: 36,fontWeight: FontWeight.bold);
   static const TextStyle title = TextStyle(fontSize: 28,fontWeight: FontWeight.bold);
-  static const TextStyle largeText = TextStyle(fontSize: 14,fontWeight: FontWeight.w700);
+  static const TextStyle authScreenDetailsText = TextStyle(fontSize: 14,fontWeight: FontWeight.w700);
+  static const TextStyle normalText = TextStyle(fontSize: 18,fontWeight: FontWeight.w500);
 }

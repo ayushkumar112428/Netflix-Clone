@@ -18,11 +18,11 @@ class TwoTextLastClickabel extends StatelessWidget {
           children: [
             TextSpan(
                 text: text1,
-                style: AppTextStyles.largeText.copyWith(color: text1Color)
+                style: AppTextStyles.authScreenDetailsText.copyWith(color: text1Color)
             ),
             TextSpan(
               text: text2,
-              style: AppTextStyles.largeText.copyWith(color: text2Color),
+              style: AppTextStyles.authScreenDetailsText.copyWith(color: text2Color),
               recognizer: TapGestureRecognizer()
                 ..onTap = onTap,
             ),

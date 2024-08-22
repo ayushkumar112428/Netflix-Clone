@@ -49,9 +49,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Form submitted successfully')),
-      );
+      Navigator.pushNamed(context, "/Home");
     } else {
       _emailFocusNode.requestFocus();
     }
