@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:netflixclone/views/home/home_screen.dart';
+import 'package:netflixclone/views/auth/sing_in_screen.dart';
+import 'package:netflixclone/views/auth/sing_up_screen.dart';
+import 'package:netflixclone/views/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,38 +19,16 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Netflix Clone',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Colors.black,
       ),
-      home: const MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/SingIn': (context) => const SingInScreen(),
+        '/SingUp': (context) => const SingUpScreen(),
+      },
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  void initState() {
-    super.initState();
-    _navigateToHome();
-  }
-
-  _navigateToHome() async {
-    await Future.delayed(Duration(seconds: 2), () {});
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => HomeScreen()),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Image.asset("assets/icons/netflixisplashicon.gif", fit: BoxFit.fitWidth);
   }
 }
