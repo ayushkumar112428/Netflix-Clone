@@ -15,7 +15,7 @@ class IconTextOnTapColumn extends StatelessWidget {
         children: [
           Image.asset(img,width: 28,height: 28,fit: BoxFit.fill,),
           const SizedBox(height: 3,),
-          Text(title,style: AppTextStyles.normalText,),
+          Text(title,style: AppTextStyles.textButtonTextStyle,),
         ],
       ),
     );

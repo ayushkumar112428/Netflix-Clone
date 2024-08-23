@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:netflixclone/declaration/colors.dart';
 import 'package:netflixclone/declaration/textstyle.dart';
 import 'package:netflixclone/widget/icon_text_ontap_column.dart';
+import 'package:netflixclone/widget/image_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -103,9 +104,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("Movie",style: AppTextStyles.normalText,),
-                      Text("TV Shows",style: AppTextStyles.normalText,),
-                      Text("Categories",style: AppTextStyles.normalText,),
+                      Text("Movie",style: AppTextStyles.textButtonTextStyle,),
+                      Text("TV Shows",style: AppTextStyles.textButtonTextStyle,),
+                      Text("Categories",style: AppTextStyles.textButtonTextStyle,),
                     ],
                   ),
                 ),
@@ -134,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Image.asset("assets/icons/play_icon.png",height: 28,width: 28,fit: BoxFit.fill,),
-                                Text("Play",style: AppTextStyles.hedgingText.copyWith(color: Colors.black),)
+                                Text("Play",style: AppTextStyles.hedgingTextStyle.copyWith(color: Colors.black),)
                               ],
                             ),
                           ),
@@ -154,22 +155,49 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("Populer Movie",style: AppTextStyles.hedgingText,),
+                Text("Populer Movie",style: AppTextStyles.hedgingTextStyle,),
                 const SizedBox(height: 3,),
-                Container(
-                  width: 166.67, height: 250,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6),
-                    image: DecorationImage(image: NetworkImage("https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg"),fit: BoxFit.fill),
+                SizedBox(
+                  height: 250 * 0.7,
+                  child: ListView.builder(
+                    itemCount: 5,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context,index){
+                      return ImageCard(img: "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg");
+                    },
                   ),
                 ),
+                const SizedBox(height: 10,),
+                Text("Populer TV Series",style: AppTextStyles.hedgingTextStyle,),
                 const SizedBox(height: 3,),
-                Text("Populer TV Series",style: AppTextStyles.hedgingText,),
-                Text("Top Rated Movie",style: AppTextStyles.hedgingText,),
-                Text("Upcoming Movie",style: AppTextStyles.hedgingText,),
-                Text("Trending Movie & TV Shows",style: AppTextStyles.hedgingText,),
-                Text("Airing Today TV Series",style: AppTextStyles.hedgingText,),
-                Text("Top Rated TV Series",style: AppTextStyles.hedgingText,),
+                SizedBox(
+                  height: 250 * 0.7,
+                  child: ListView.builder(
+                    itemCount: 5,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context,index){
+                      return ImageCard(img: "https://image.tmdb.org/t/p/w500/3ovFaFeojLFIl5ClqhtgYMDS8sE.jpg");
+                    },
+                  ),
+                ),
+                const SizedBox(height: 10,),
+                Text("Top Rated Movie",style: AppTextStyles.hedgingTextStyle,),
+                const SizedBox(height: 3,),
+                SizedBox(
+                  height: 250 * 0.7,
+                  child: ListView.builder(
+                    itemCount: 5,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context,index){
+                      return ImageCard(img: "https://image.tmdb.org/t/p/w500/e5ZqqPlhKstzB4geibpZh38w7Pq.jpg");
+                    },
+                  ),
+                ),
+                const SizedBox(height: 10,),
+                Text("Upcoming Movie",style: AppTextStyles.hedgingTextStyle,),
+                Text("Trending Movie & TV Shows",style: AppTextStyles.hedgingTextStyle,),
+                Text("Airing Today TV Series",style: AppTextStyles.hedgingTextStyle,),
+                Text("Top Rated TV Series",style: AppTextStyles.hedgingTextStyle,),
               ],
             ),
           )

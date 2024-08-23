@@ -17,7 +17,7 @@ class SubmitButton extends StatelessWidget {
           color: AppColors.submitButtonColor,
           borderRadius: BorderRadius.circular(6),
         ),
-        child: Center(child: Text(title,style: AppTextStyles.title,)),
+        child: Center(child: Text(title,style: AppTextStyles.titleStyle,)),
       ),
     );
   }

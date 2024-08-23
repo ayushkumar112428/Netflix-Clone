@@ -76,7 +76,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
               const SizedBox(height: 40),
               const Align(
                 alignment: Alignment.center,
-                child: Text("Sing Up", style: AppTextStyles.largeTitle),
+                child: Text("Sing Up", style: AppTextStyles.largeTitleStyle),
               ),
               const SizedBox(height: 40),
               TextFormFieldWidget(

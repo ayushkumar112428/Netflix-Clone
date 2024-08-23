@@ -77,7 +77,7 @@ class _SingInScreenState extends State<SingInScreen> {
               const SizedBox(height: 40),
               const Align(
                 alignment: Alignment.center,
-                child: Text("Sing In", style: AppTextStyles.largeTitle),
+                child: Text("Sing In", style: AppTextStyles.largeTitleStyle),
               ),
               const SizedBox(height: 40),
               TextFormFieldWidget(
@@ -103,7 +103,7 @@ class _SingInScreenState extends State<SingInScreen> {
                 alignment: Alignment.center,
                 child: InkWell(
                     child: Text("Forgot password?",
-                        style: AppTextStyles.authScreenDetailsText)),
+                        style: AppTextStyles.authScreenDetailsTextStyle)),
               ),
               const SizedBox(height: 20),
               TwoTextLastClickabel(

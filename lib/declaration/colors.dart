@@ -7,6 +7,8 @@ class AppColors {
   static const Color submitButtonColor = Color(0xFFE40100);
   static const Color errorColor = Color(0xFFFF0000);
   static const Color grayText = Color(0xFF8E8E8E);
+  static const Color graySearchBarColor = Color(0xFF292929);
+  static const Color grayColor = Color(0xFF737373);
   static const Color deepPurpleText = Color(0xFF543BED);
 
   Gradient homeImageTopToBottom = const LinearGradient(

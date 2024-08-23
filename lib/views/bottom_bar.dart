@@ -68,11 +68,11 @@ class _BottomBarState extends State<BottomBar> {
           shadowColor: AppColors.white,
           title: Text(
             'Exit App?',
-            style: AppTextStyles.title.copyWith(color: AppColors.redColor,letterSpacing: 1.2),
+            style: AppTextStyles.titleStyle.copyWith(color: AppColors.redColor,letterSpacing: 1.2),
           ),
           content: const Text(
             'Are you sure you want to exit the app?',
-            style: AppTextStyles.normalText,
+            style: AppTextStyles.textButtonTextStyle,
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -86,7 +86,7 @@ class _BottomBarState extends State<BottomBar> {
                   borderRadius: BorderRadius.circular(7),
                   color: Colors.grey,
                 ),
-                child: const Center(child: Text('No',style: AppTextStyles.normalText,)),
+                child: const Center(child: Text('No',style: AppTextStyles.textButtonTextStyle,)),
               ),
             ),
             InkWell(
@@ -97,7 +97,7 @@ class _BottomBarState extends State<BottomBar> {
                   borderRadius: BorderRadius.circular(7),
                   color: Colors.red,
                 ),
-                child: const Center(child: Text('Yes',style: AppTextStyles.normalText,),),
+                child: const Center(child: Text('Yes',style: AppTextStyles.textButtonTextStyle,),),
               ),
             ),
           ],
