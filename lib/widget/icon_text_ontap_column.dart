@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflixclone/declaration/textstyle.dart';
 
 class IconTextOnTapColumn extends StatelessWidget {
   final String img;
@@ -12,8 +13,9 @@ class IconTextOnTapColumn extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
-          Image.asset(img),
-          Text(title),
+          Image.asset(img,width: 28,height: 28,fit: BoxFit.fill,),
+          const SizedBox(height: 3,),
+          Text(title,style: AppTextStyles.normalText,),
         ],
       ),
     );

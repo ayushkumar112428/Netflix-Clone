@@ -49,7 +49,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      Navigator.pushNamed(context, "/Home");
+      Navigator.pushNamed(context, "/BottomBar");
     } else {
       _emailFocusNode.requestFocus();
     }
