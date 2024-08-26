@@ -10,20 +10,20 @@ import 'home/home_screen.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
+
   @override
   State<BottomBar> createState() => _BottomBarState();
 }
 
 class _BottomBarState extends State<BottomBar> {
-
   final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 
   List<Widget> _buildScreens() {
     return [
-      const HomeScreen(),
-      const SearchScreen(),
-      const DownloadScreen(),
-      const ProfileScreen(),
+      HomeScreen(),
+      SearchScreen(),
+      DownloadScreen(),
+      ProfileScreen(),
     ];
   }
 
@@ -58,7 +58,7 @@ class _BottomBarState extends State<BottomBar> {
 
   Future<bool> _onWillPop(BuildContext? context) async {
     if (_controller.index != 0) {
-      _controller.jumpToTab(0); // Go to the first tab if not already there
+      _controller.jumpToTab(0);
       return false;
     } else {
       final shouldExit = await showDialog(
@@ -68,7 +68,7 @@ class _BottomBarState extends State<BottomBar> {
           shadowColor: AppColors.white,
           title: Text(
             'Exit App?',
-            style: AppTextStyles.titleStyle.copyWith(color: AppColors.redColor,letterSpacing: 1.2),
+            style: AppTextStyles.titleStyle.copyWith(color: AppColors.redColor, letterSpacing: 1.2),
           ),
           content: const Text(
             'Are you sure you want to exit the app?',
@@ -81,23 +81,25 @@ class _BottomBarState extends State<BottomBar> {
             InkWell(
               onTap: () => Navigator.of(context).pop(false),
               child: Container(
-                width: 70,height: 36,
+                width: 70,
+                height: 36,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(7),
                   color: Colors.grey,
                 ),
-                child: const Center(child: Text('No',style: AppTextStyles.textButtonTextStyle,)),
+                child: const Center(child: Text('No', style: AppTextStyles.textButtonTextStyle)),
               ),
             ),
             InkWell(
               onTap: () => Navigator.of(context).pop(true),
               child: Container(
-                width: 70,height: 36,
+                width: 70,
+                height: 36,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(7),
                   color: Colors.red,
                 ),
-                child: const Center(child: Text('Yes',style: AppTextStyles.textButtonTextStyle,),),
+                child: const Center(child: Text('Yes', style: AppTextStyles.textButtonTextStyle)),
               ),
             ),
           ],
@@ -122,8 +124,8 @@ class _BottomBarState extends State<BottomBar> {
         decoration: NavBarDecoration(
           borderRadius: BorderRadius.circular(6.0),
         ),
-        navBarStyle: NavBarStyle.style6, // Style 6 for icons-only bottom navigation
-        onWillPop: _onWillPop, // Custom back button handling
+        navBarStyle: NavBarStyle.style6,
+        onWillPop: _onWillPop,
       ),
     );
   }

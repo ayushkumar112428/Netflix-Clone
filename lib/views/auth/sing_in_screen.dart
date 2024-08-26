@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:netflixclone/declaration/colors.dart';
 import 'package:netflixclone/declaration/textstyle.dart';
@@ -124,7 +123,7 @@ class _SingInScreenState extends State<SingInScreen> {
                 text2Color: AppColors.deepPurpleText,
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Click')),
+                    const SnackBar(content: Text('Click')),
                   );
                 },
               ),

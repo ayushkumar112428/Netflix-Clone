@@ -116,7 +116,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
                 text2Color: AppColors.deepPurpleText,
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Click')),
+                    const SnackBar(content: Text('Click')),
                   );
                 },
               ),

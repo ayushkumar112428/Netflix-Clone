@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     InkWell(
                       onTap: (){
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('left')),
+                          const SnackBar(content: Text('left')),
                         );
                       },
                       child: SizedBox(
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     InkWell(
                       onTap: (){
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('right')),
+                          const SnackBar(content: Text('right')),
                         );
                       },
                       child: SizedBox(
@@ -155,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("Populer Movie",style: AppTextStyles.hedgingTextStyle,),
+                const Text("Popular Movie",style: AppTextStyles.hedgingTextStyle,),
                 const SizedBox(height: 3,),
                 SizedBox(
                   height: 250 * 0.7,
@@ -163,12 +163,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: 5,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context,index){
-                      return ImageCard(img: "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg");
+                      return const ImageCard(img: "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg");
                     },
                   ),
                 ),
                 const SizedBox(height: 10,),
-                Text("Populer TV Series",style: AppTextStyles.hedgingTextStyle,),
+                const Text("Popular TV Series",style: AppTextStyles.hedgingTextStyle,),
                 const SizedBox(height: 3,),
                 SizedBox(
                   height: 250 * 0.7,
@@ -176,12 +176,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: 5,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context,index){
-                      return ImageCard(img: "https://image.tmdb.org/t/p/w500/3ovFaFeojLFIl5ClqhtgYMDS8sE.jpg");
+                      return const ImageCard(img: "https://image.tmdb.org/t/p/w500/3ovFaFeojLFIl5ClqhtgYMDS8sE.jpg");
                     },
                   ),
                 ),
                 const SizedBox(height: 10,),
-                Text("Top Rated Movie",style: AppTextStyles.hedgingTextStyle,),
+                const Text("Top Rated Movie",style: AppTextStyles.hedgingTextStyle,),
                 const SizedBox(height: 3,),
                 SizedBox(
                   height: 250 * 0.7,
@@ -189,15 +189,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: 5,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context,index){
-                      return ImageCard(img: "https://image.tmdb.org/t/p/w500/e5ZqqPlhKstzB4geibpZh38w7Pq.jpg");
+                      return const ImageCard(img: "https://image.tmdb.org/t/p/w500/e5ZqqPlhKstzB4geibpZh38w7Pq.jpg");
                     },
                   ),
                 ),
                 const SizedBox(height: 10,),
-                Text("Upcoming Movie",style: AppTextStyles.hedgingTextStyle,),
-                Text("Trending Movie & TV Shows",style: AppTextStyles.hedgingTextStyle,),
-                Text("Airing Today TV Series",style: AppTextStyles.hedgingTextStyle,),
-                Text("Top Rated TV Series",style: AppTextStyles.hedgingTextStyle,),
+                const Text("Upcoming Movie",style: AppTextStyles.hedgingTextStyle,),
+                const Text("Trending Movie & TV Shows",style: AppTextStyles.hedgingTextStyle,),
+                const Text("Airing Today TV Series",style: AppTextStyles.hedgingTextStyle,),
+                const Text("Top Rated TV Series",style: AppTextStyles.hedgingTextStyle,),
               ],
             ),
           )
