@@ -36,116 +36,114 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(left: 24),
-        child: ListView(
-          children: [
-            const SizedBox(height: 10),
-            // Search Bar
-            Padding(
-              padding: const EdgeInsets.only(right: 24),
-              child: SizedBox(
-                height: 50,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: AppColors.graySearchBarColor,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Row(
-                          children: [
-                            const SizedBox(width: 10),
-                            Image.asset(
-                              "assets/icons/search_icon_field.png",
+    return Padding(
+      padding: const EdgeInsets.only(left: 24),
+      child: ListView(
+        children: [
+          const SizedBox(height: 10),
+          // Search Bar
+          Padding(
+            padding: const EdgeInsets.only(right: 24),
+            child: SizedBox(
+              height: 50,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: AppColors.graySearchBarColor,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Row(
+                        children: [
+                          const SizedBox(width: 10),
+                          Image.asset(
+                            "assets/icons/search_icon_field.png",
+                            width: 20,
+                            height: 20,
+                            fit: BoxFit.fill,
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: TextField(
+                              controller: _searchController,
+                              cursorColor: AppColors.white,
+                              cursorHeight: 18,
+                              style: const TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                hintText: 'Search',
+                                hintStyle: AppTextStyles.textStyle.copyWith(
+                                  color: AppColors.grayColor,
+                                  letterSpacing: 1.1,
+                                ),
+                                border: InputBorder.none,
+                                contentPadding: const EdgeInsets.only(bottom: 7),
+                              ),
+                              onChanged: (value) {
+                                setState(() {}); // Update UI when text changes
+                              },
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          InkWell(
+                            onTap: (){
+                              setState(() {
+                                _searchController.clear();
+                              });
+                            },
+                            child: Image.asset(
+                              "assets/icons/cancel_icon.png",
                               width: 20,
                               height: 20,
                               fit: BoxFit.fill,
                             ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: TextField(
-                                controller: _searchController,
-                                cursorColor: AppColors.white,
-                                cursorHeight: 18,
-                                style: const TextStyle(color: Colors.white),
-                                decoration: InputDecoration(
-                                  hintText: 'Search',
-                                  hintStyle: AppTextStyles.textStyle.copyWith(
-                                    color: AppColors.grayColor,
-                                    letterSpacing: 1.1,
-                                  ),
-                                  border: InputBorder.none,
-                                  contentPadding: const EdgeInsets.only(bottom: 7),
-                                ),
-                                onChanged: (value) {
-                                  setState(() {}); // Update UI when text changes
-                                },
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            InkWell(
-                              onTap: (){
-                                setState(() {
-                                  _searchController.clear();
-                                });
-                              },
-                              child: Image.asset(
-                                "assets/icons/cancel_icon.png",
-                                width: 20,
-                                height: 20,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(width: 10),
+                        ],
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    GestureDetector(
-                      onTap: () {
-                        _searchController.clear();
-                      },
-                      child: const Text(
-                        'Cancel',
-                        style: AppTextStyles.textStyle,
-                      ),
+                  ),
+                  const SizedBox(width: 12),
+                  GestureDetector(
+                    onTap: () {
+                      _searchController.clear();
+                    },
+                    child: const Text(
+                      'Cancel',
+                      style: AppTextStyles.textStyle,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 10),
-            const Text(
-              "Movie & TV",
-              style: AppTextStyles.hedgingTextStyle,
-            ),
-            const SizedBox(height: 10),
-            Container(
-              padding: const EdgeInsets.only(right: 6),
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3, // Number of columns in the grid
-                  crossAxisSpacing: 0, // Space between columns
-                  mainAxisSpacing: 20.0, // Space between rows
-                ),
-                itemCount: searchListOfData.length, // Set item count to the length of the list
-                itemBuilder: (context, index) {
-                  return ImageCard(
-                    img: searchListOfData[index], // Dynamically load images from the list
-                  );
-                },
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            "Movie & TV",
+            style: AppTextStyles.hedgingTextStyle,
+          ),
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.only(right: 6),
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3, // Number of columns in the grid
+                crossAxisSpacing: 0, // Space between columns
+                mainAxisSpacing: 20.0, // Space between rows
               ),
+              itemCount: searchListOfData.length, // Set item count to the length of the list
+              itemBuilder: (context, index) {
+                return ImageCard(
+                  img: searchListOfData[index], // Dynamically load images from the list
+                );
+              },
             ),
-            // const SizedBox(height: 10),
-          ],
-        ),
+          ),
+          // const SizedBox(height: 10),
+        ],
       ),
     );
   }
