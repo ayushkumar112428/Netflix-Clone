@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:netflixclone/declaration/colors.dart';
 import 'package:netflixclone/declaration/textstyle.dart';
 import 'package:netflixclone/widget/profile_card.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final BuildContext ctx;
+  const ProfileScreen({super.key, required this.ctx});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -134,7 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 30),
             TextButton(
               onPressed: () {
-                context.go('/singIn');
+                Navigator.pushNamed(widget.ctx, "/SingIn");
               },
               child: Text(
                 "Sign Out",

@@ -1,5 +1,6 @@
+import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:netflixclone/views/auth/sing_in_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -9,27 +10,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    _navigateToHome();
-  }
-
-  Future<void> _navigateToHome() async {
-    await Future.delayed(const Duration(seconds: 2));
-    if (mounted) {
-      // Use `go` instead of `push` to prevent the user from navigating back to the splash screen
-      context.go('/singIn');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return FlutterSplashScreen(
+      useImmersiveMode: true,
+      duration: const Duration(seconds: 2),
+      nextScreen: const SingInScreen(),
+      splashScreenBody: Center(
         child: Image.asset(
           "assets/netflix/netflixisplashicon.gif",
-          fit: BoxFit.cover,
         ),
       ),
     );

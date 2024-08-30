@@ -19,12 +19,12 @@ class BottomBar extends StatefulWidget {
 class _BottomBarState extends State<BottomBar> {
   final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
 
-  List<Widget> _buildScreens() {
+  List<Widget> _buildScreens(BuildContext ctx) {
     return [
       HomeScreen(),
       SearchScreen(),
       DownloadScreen(),
-      ProfileScreen(),
+      ProfileScreen(ctx: ctx,),
     ];
   }
 
@@ -115,7 +115,7 @@ class _BottomBarState extends State<BottomBar> {
       body: PersistentTabView(
         context,
         controller: _controller,
-        screens: _buildScreens(),
+        screens: _buildScreens(context),
         items: _navBarsItems(),
         backgroundColor: Colors.black,
         handleAndroidBackButtonPress: true,

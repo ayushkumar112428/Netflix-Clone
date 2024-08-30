@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:netflixclone/declaration/colors.dart';
 import 'package:netflixclone/declaration/textstyle.dart';
 import 'package:netflixclone/widget/submit_button.dart';
@@ -51,7 +49,7 @@ class _SingInScreenState extends State<SingInScreen> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      context.pushReplacement("/bottomBar");
+      Navigator.pushNamedAndRemoveUntil(context, "/BottomBar",(Route<dynamic> route) => false,);
     } else {
       _emailFocusNode.requestFocus();
     }
@@ -64,116 +62,72 @@ class _SingInScreenState extends State<SingInScreen> {
     super.dispose();
   }
 
-  Future<bool> _onWillPop() async {
-    final shouldExit = await showDialog(
-      context: context,
-      barrierDismissible: false, // Prevents dialog from closing on outside tap
-      builder: (context) => AlertDialog(
-        title: const Text('Exit App?'),
-        content: const Text('Are you sure you want to exit the app?'),
-        actions: [
-          InkWell(
-            onTap: () => Navigator.of(context).pop(true),
-            child: Container(
-              width: 70,
-              height: 36,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(7),
-                color: Colors.grey,
-              ),
-              child: const Center(child: Text('No', style: AppTextStyles.textButtonTextStyle)),
-            ),
-          ),
-          InkWell(
-            onTap: () => SystemNavigator.pop(),
-            child: Container(
-              width: 70,
-              height: 36,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(7),
-                color: Colors.red,
-              ),
-              child: const Center(child: Text('Yes', style: AppTextStyles.textButtonTextStyle)),
-            ),
-          ),
-        ],
-      ),
-    );
-
-    return shouldExit ?? false;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BackButtonListener(
-        onBackButtonPressed: (){
-          return _onWillPop();
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Form(
-            key: _formKey,
-            child: ListView(
-              children: [
-                const SizedBox(height: 110),
-                Image.asset("assets/netflix/netflixname.png"),
-                const SizedBox(height: 40),
-                const Align(
-                  alignment: Alignment.center,
-                  child: Text("Sing In", style: AppTextStyles.largeTitleStyle),
-                ),
-                const SizedBox(height: 40),
-                TextFormFieldWidget(
-                  labelText: "Email Address",
-                  keyboardType: TextInputType.text,
-                  textController: _emailController,
-                  validator: _validateEmail,
-                ),
-                const SizedBox(height: 20),
-                TextFormFieldWidget(
-                  labelText: "Password",
-                  keyboardType: TextInputType.text,
-                  textController: _passwordController,
-                  validator: _validatePassword,
-                ),
-                const SizedBox(height: 30),
-                SubmitButton(
-                  title: "Sing In",
-                  onTap: _submitForm,
-                ),
-                const SizedBox(height: 20),
-                const Align(
-                  alignment: Alignment.center,
-                  child: InkWell(
-                      child: Text("Forgot password?",
-                          style: AppTextStyles.authScreenDetailsTextStyle)),
-                ),
-                const SizedBox(height: 20),
-                TwoTextLastClickabel(
-                  text1: "New to Netflix?",
-                  text1Color: AppColors.grayText,
-                  text2: " Sign up now.",
-                  text2Color: AppColors.white,
-                  onTap: () {
-                    context.push("/singUp");
-                  },
-                ),
-                const SizedBox(height: 40),
-                TwoTextLastClickabel(
-                  text1:
-                      "This page is protected by Google reCAPTCHA to ensure you're not a bot.",
-                  text1Color: AppColors.grayText,
-                  text2: " Learn more.",
-                  text2Color: AppColors.deepPurpleText,
-                  onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Click')),
-                    );
-                  },
-                ),
-              ],
-            ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: [
+              const SizedBox(height: 110),
+              Image.asset("assets/netflix/netflixname.png"),
+              const SizedBox(height: 40),
+              const Align(
+                alignment: Alignment.center,
+                child: Text("Sing In", style: AppTextStyles.largeTitleStyle),
+              ),
+              const SizedBox(height: 40),
+              TextFormFieldWidget(
+                labelText: "Email Address",
+                keyboardType: TextInputType.text,
+                textController: _emailController,
+                validator: _validateEmail,
+              ),
+              const SizedBox(height: 20),
+              TextFormFieldWidget(
+                labelText: "Password",
+                keyboardType: TextInputType.text,
+                textController: _passwordController,
+                validator: _validatePassword,
+              ),
+              const SizedBox(height: 30),
+              SubmitButton(
+                title: "Sing In",
+                onTap: _submitForm,
+              ),
+              const SizedBox(height: 20),
+              const Align(
+                alignment: Alignment.center,
+                child: InkWell(
+                    child: Text("Forgot password?",
+                        style: AppTextStyles.authScreenDetailsTextStyle)),
+              ),
+              const SizedBox(height: 20),
+              TwoTextLastClickabel(
+                text1: "New to Netflix?",
+                text1Color: AppColors.grayText,
+                text2: " Sign up now.",
+                text2Color: AppColors.white,
+                onTap: () {
+                  Navigator.pushNamed(context, "/SingUp");
+                },
+              ),
+              const SizedBox(height: 40),
+              TwoTextLastClickabel(
+                text1:
+                    "This page is protected by Google reCAPTCHA to ensure you're not a bot.",
+                text1Color: AppColors.grayText,
+                text2: " Learn more.",
+                text2Color: AppColors.deepPurpleText,
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Click')),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),
