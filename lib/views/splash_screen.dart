@@ -1,4 +1,6 @@
+import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:netflixclone/views/auth/sing_in_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -8,26 +10,17 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    _navigateToHome();
-  }
-
-  Future<void> _navigateToHome() async {
-    await Future.delayed(const Duration(seconds: 2));
-    // Check if the widget is still in the widget tree
-    if (mounted) {
-      Navigator.pushReplacementNamed(context, "/SingIn");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Image.asset(
-        "assets/netflix/netflixisplashicon.gif",
-        fit: BoxFit.cover,
+    return FlutterSplashScreen(
+      useImmersiveMode: true,
+      duration: const Duration(seconds: 2),
+      nextScreen: const SingInScreen(),
+      splashScreenBody: Center(
+        child: Image.asset(
+          "assets/netflix/netflixisplashicon.gif",
+        ),
       ),
     );
   }

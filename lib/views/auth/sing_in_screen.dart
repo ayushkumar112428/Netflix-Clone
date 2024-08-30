@@ -49,7 +49,7 @@ class _SingInScreenState extends State<SingInScreen> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      Navigator.pushNamed(context, "/BottomBar");
+      Navigator.pushNamedAndRemoveUntil(context, "/BottomBar",(Route<dynamic> route) => false,);
     } else {
       _emailFocusNode.requestFocus();
     }

@@ -49,7 +49,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      Navigator.pushNamed(context, "/BottomBar");
+      Navigator.pushNamedAndRemoveUntil(context, "/BottomBar",(Route<dynamic> route) => false,);
     } else {
       _emailFocusNode.requestFocus();
     }
@@ -104,7 +104,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
                 text2: "Sign in now.",
                 text2Color: AppColors.white,
                 onTap: () {
-                  Navigator.pushNamed(context, "/SingIn");
+                  Navigator.pushNamedAndRemoveUntil(context, "/SingIn",(Route<dynamic> route) => false,);
                 },
               ),
               const SizedBox(height: 40),
