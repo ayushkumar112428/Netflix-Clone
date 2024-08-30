@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:netflixclone/declaration/colors.dart';
 import 'package:netflixclone/declaration/textstyle.dart';
 import 'package:netflixclone/views/download/download_screen.dart';
@@ -64,8 +65,7 @@ class _BottomBarState extends State<BottomBar> {
       final shouldExit = await showDialog(
         context: context!,
         builder: (context) => AlertDialog(
-          elevation: 2,
-          shadowColor: AppColors.white,
+          elevation: 1,
           title: Text(
             'Exit App?',
             style: AppTextStyles.titleStyle.copyWith(color: AppColors.redColor, letterSpacing: 1.2),
@@ -91,7 +91,7 @@ class _BottomBarState extends State<BottomBar> {
               ),
             ),
             InkWell(
-              onTap: () => Navigator.of(context).pop(true),
+              onTap: () => SystemNavigator.pop(),
               child: Container(
                 width: 70,
                 height: 36,

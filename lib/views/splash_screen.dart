@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,18 +17,20 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _navigateToHome() async {
     await Future.delayed(const Duration(seconds: 2));
-    // Check if the widget is still in the widget tree
     if (mounted) {
-      Navigator.pushReplacementNamed(context, "/SingIn");
+      // Use `go` instead of `push` to prevent the user from navigating back to the splash screen
+      context.go('/singIn');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Image.asset(
-        "assets/netflix/netflixisplashicon.gif",
-        fit: BoxFit.cover,
+    return Scaffold(
+      body: Center(
+        child: Image.asset(
+          "assets/netflix/netflixisplashicon.gif",
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

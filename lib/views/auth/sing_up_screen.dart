@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:netflixclone/declaration/colors.dart';
 import 'package:netflixclone/declaration/textstyle.dart';
 import 'package:netflixclone/widget/submit_button.dart';
@@ -49,7 +51,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      Navigator.pushNamed(context, "/BottomBar");
+      context.pushReplacement("/bottomBar");
     } else {
       _emailFocusNode.requestFocus();
     }
@@ -104,7 +106,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
                 text2: "Sign in now.",
                 text2Color: AppColors.white,
                 onTap: () {
-                  Navigator.pushNamed(context, "/SingIn");
+                  context.go("/singIn");
                 },
               ),
               const SizedBox(height: 40),
