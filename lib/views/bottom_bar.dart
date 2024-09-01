@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:netflixclone/declaration/colors.dart';
-import 'package:netflixclone/declaration/textstyle.dart';
 import 'package:netflixclone/views/download/download_screen.dart';
 import 'package:netflixclone/views/profile/profile_screen.dart';
 import 'package:netflixclone/views/search/search_screen.dart';
-import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
-
 import 'home/home_screen.dart';
 
 class BottomBar extends StatefulWidget {
@@ -17,115 +12,51 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBarState extends State<BottomBar> {
-  final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
+  int _currentIndex = 0;
 
-  List<Widget> _buildScreens(BuildContext ctx) {
-    return [
-      HomeScreen(),
-      SearchScreen(),
-      DownloadScreen(),
-      ProfileScreen(ctx: ctx,),
-    ];
-  }
-
-  List<PersistentBottomNavBarItem> _navBarsItems() {
-    return [
-      PersistentBottomNavBarItem(
-        icon: const Icon(Icons.home),
-        inactiveIcon: const Icon(Icons.home_outlined),
-        activeColorPrimary: Colors.white,
-        inactiveColorPrimary: Colors.grey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(Icons.search),
-        inactiveIcon: const Icon(Icons.search_outlined),
-        activeColorPrimary: Colors.white,
-        inactiveColorPrimary: Colors.grey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(Icons.download),
-        inactiveIcon: const Icon(Icons.download_outlined),
-        activeColorPrimary: Colors.white,
-        inactiveColorPrimary: Colors.grey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(Icons.person),
-        inactiveIcon: const Icon(Icons.person_outline),
-        activeColorPrimary: Colors.white,
-        inactiveColorPrimary: Colors.grey,
-      ),
-    ];
-  }
-
-  Future<bool> _onWillPop(BuildContext? context) async {
-    if (_controller.index != 0) {
-      _controller.jumpToTab(0);
-      return false;
-    } else {
-      final shouldExit = await showDialog(
-        context: context!,
-        builder: (context) => AlertDialog(
-          elevation: 1,
-          title: Text(
-            'Exit App?',
-            style: AppTextStyles.titleStyle.copyWith(color: AppColors.redColor, letterSpacing: 1.2),
-          ),
-          content: const Text(
-            'Are you sure you want to exit the app?',
-            style: AppTextStyles.textButtonTextStyle,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          actions: [
-            InkWell(
-              onTap: () => Navigator.of(context).pop(false),
-              child: Container(
-                width: 70,
-                height: 36,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(7),
-                  color: Colors.grey,
-                ),
-                child: const Center(child: Text('No', style: AppTextStyles.textButtonTextStyle)),
-              ),
-            ),
-            InkWell(
-              onTap: () => SystemNavigator.pop(),
-              child: Container(
-                width: 70,
-                height: 36,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(7),
-                  color: Colors.red,
-                ),
-                child: const Center(child: Text('Yes', style: AppTextStyles.textButtonTextStyle)),
-              ),
-            ),
-          ],
-        ),
-      );
-      return shouldExit ?? false;
-    }
-  }
+  final List<Widget> _screens = [
+    HomeScreen(),
+    SearchScreen(),
+    DownloadScreen(),
+    ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PersistentTabView(
-        context,
-        controller: _controller,
-        screens: _buildScreens(context),
-        items: _navBarsItems(),
+      body: _screens[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
         backgroundColor: Colors.black,
-        handleAndroidBackButtonPress: true,
-        resizeToAvoidBottomInset: true,
-        stateManagement: true,
-        decoration: NavBarDecoration(
-          borderRadius: BorderRadius.circular(6.0),
-        ),
-        navBarStyle: NavBarStyle.style6,
-        onWillPop: _onWillPop,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search_outlined),
+            activeIcon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.download_outlined),
+            activeIcon: Icon(Icons.download),
+            label: 'Downloads',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            activeIcon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }

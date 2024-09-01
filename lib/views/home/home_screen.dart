@@ -15,13 +15,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     double wSize = MediaQuery.of(context).size.width;
-    double homePageImageHeight = wSize*3/2;
+    double homePageImageHeight = wSize * 3 / 2;
     return Scaffold(
       body: ListView(
         children: [
+          const SizedBox(
+            height: 10,
+          ),
           // AppBar
           Padding(
-            padding: const EdgeInsets.only(left: 24,right: 24,bottom: 6),
+            padding: const EdgeInsets.only(left: 24, right: 24, bottom: 6),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -31,9 +34,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset("assets/icons/cast_icon.png",height: 40,width: 40,fit: BoxFit.fill,),
-                    const SizedBox(width: 10,),
-                    Image.asset("assets/icons/user_icon.png",height: 36,width: 36,fit: BoxFit.fill,),
+                    Image.asset(
+                      "assets/icons/cast_icon.png",
+                      height: 40,
+                      width: 40,
+                      fit: BoxFit.fill,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Image.asset(
+                      "assets/icons/user_icon.png",
+                      height: 36,
+                      width: 36,
+                      fit: BoxFit.fill,
+                    ),
                   ],
                 ),
               ],
@@ -49,30 +64,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   width: wSize,
                   height: homePageImageHeight,
-                  child: Image.network("https://image.tmdb.org/t/p/w500/b33nnKl1GSFbao4l3fZDDqsMx0F.jpg",height: homePageImageHeight,width: wSize,fit: BoxFit.fill,),
+                  child: Image.network(
+                    "https://image.tmdb.org/t/p/w500/b33nnKl1GSFbao4l3fZDDqsMx0F.jpg",
+                    height: homePageImageHeight,
+                    width: wSize,
+                    fit: BoxFit.fill,
+                  ),
                 ),
                 // chang image onTap
                 Row(
                   children: [
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('left')),
                         );
                       },
                       child: SizedBox(
-                        width: wSize*0.5,
+                        width: wSize * 0.5,
                         height: homePageImageHeight,
                       ),
                     ),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('right')),
                         );
                       },
                       child: SizedBox(
-                        width: wSize*0.5,
+                        width: wSize * 0.5,
                         height: homePageImageHeight,
                       ),
                     ),
@@ -104,9 +124,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: const [
-                      Text("Movie",style: AppTextStyles.textButtonTextStyle,),
-                      Text("TV Shows",style: AppTextStyles.textButtonTextStyle,),
-                      Text("Categories",style: AppTextStyles.textButtonTextStyle,),
+                      Text(
+                        "Movie",
+                        style: AppTextStyles.textButtonTextStyle,
+                      ),
+                      Text(
+                        "TV Shows",
+                        style: AppTextStyles.textButtonTextStyle,
+                      ),
+                      Text(
+                        "Categories",
+                        style: AppTextStyles.textButtonTextStyle,
+                      ),
                     ],
                   ),
                 ),
@@ -121,7 +150,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          IconTextOnTapColumn(img: "assets/icons/add_icon.png",title: "My List",onTap: (){},),
+                          IconTextOnTapColumn(
+                            img: "assets/icons/add_icon.png",
+                            title: "My List",
+                            onTap: () {},
+                          ),
                           Container(
                             width: 120,
                             height: 45,
@@ -134,12 +167,25 @@ class _HomeScreenState extends State<HomeScreen> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Image.asset("assets/icons/play_icon.png",height: 28,width: 28,fit: BoxFit.fill,),
-                                Text("Play",style: AppTextStyles.hedgingTextStyle.copyWith(color: Colors.black),)
+                                Image.asset(
+                                  "assets/icons/play_icon.png",
+                                  height: 28,
+                                  width: 28,
+                                  fit: BoxFit.fill,
+                                ),
+                                Text(
+                                  "Play",
+                                  style: AppTextStyles.hedgingTextStyle
+                                      .copyWith(color: Colors.black),
+                                )
                               ],
                             ),
                           ),
-                          IconTextOnTapColumn(img: "assets/icons/info_icon.png",title: "Info",onTap: (){},),
+                          IconTextOnTapColumn(
+                            img: "assets/icons/info_icon.png",
+                            title: "Info",
+                            onTap: () {},
+                          ),
                         ],
                       ),
                     ),
@@ -150,54 +196,93 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           // bottom column
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 3),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 3),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Text("Popular Movie",style: AppTextStyles.hedgingTextStyle,),
-                const SizedBox(height: 3,),
+                const Text(
+                  "Popular Movie",
+                  style: AppTextStyles.hedgingTextStyle,
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
                 SizedBox(
                   height: 250 * 0.7,
                   child: ListView.builder(
                     itemCount: 5,
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: (context,index){
-                      return const ImageCard(img: "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg");
+                    itemBuilder: (context, index) {
+                      return const ImageCard(
+                          img:
+                              "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg");
                     },
                   ),
                 ),
-                const SizedBox(height: 10,),
-                const Text("Popular TV Series",style: AppTextStyles.hedgingTextStyle,),
-                const SizedBox(height: 3,),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  "Popular TV Series",
+                  style: AppTextStyles.hedgingTextStyle,
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
                 SizedBox(
                   height: 250 * 0.7,
                   child: ListView.builder(
                     itemCount: 5,
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: (context,index){
-                      return const ImageCard(img: "https://image.tmdb.org/t/p/w500/3ovFaFeojLFIl5ClqhtgYMDS8sE.jpg");
+                    itemBuilder: (context, index) {
+                      return const ImageCard(
+                          img:
+                              "https://image.tmdb.org/t/p/w500/3ovFaFeojLFIl5ClqhtgYMDS8sE.jpg");
                     },
                   ),
                 ),
-                const SizedBox(height: 10,),
-                const Text("Top Rated Movie",style: AppTextStyles.hedgingTextStyle,),
-                const SizedBox(height: 3,),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  "Top Rated Movie",
+                  style: AppTextStyles.hedgingTextStyle,
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
                 SizedBox(
                   height: 250 * 0.7,
                   child: ListView.builder(
                     itemCount: 5,
                     scrollDirection: Axis.horizontal,
-                    itemBuilder: (context,index){
-                      return const ImageCard(img: "https://image.tmdb.org/t/p/w500/e5ZqqPlhKstzB4geibpZh38w7Pq.jpg");
+                    itemBuilder: (context, index) {
+                      return const ImageCard(
+                          img:
+                              "https://image.tmdb.org/t/p/w500/e5ZqqPlhKstzB4geibpZh38w7Pq.jpg");
                     },
                   ),
                 ),
-                const SizedBox(height: 10,),
-                const Text("Upcoming Movie",style: AppTextStyles.hedgingTextStyle,),
-                const Text("Trending Movie & TV Shows",style: AppTextStyles.hedgingTextStyle,),
-                const Text("Airing Today TV Series",style: AppTextStyles.hedgingTextStyle,),
-                const Text("Top Rated TV Series",style: AppTextStyles.hedgingTextStyle,),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  "Upcoming Movie",
+                  style: AppTextStyles.hedgingTextStyle,
+                ),
+                const Text(
+                  "Trending Movie & TV Shows",
+                  style: AppTextStyles.hedgingTextStyle,
+                ),
+                const Text(
+                  "Airing Today TV Series",
+                  style: AppTextStyles.hedgingTextStyle,
+                ),
+                const Text(
+                  "Top Rated TV Series",
+                  style: AppTextStyles.hedgingTextStyle,
+                ),
               ],
             ),
           )

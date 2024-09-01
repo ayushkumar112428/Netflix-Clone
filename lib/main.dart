@@ -28,7 +28,8 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Colors.black,
       ),
-      home: const SplashScreen(),
+      // home: const SplashScreen(),
+      initialRoute: "/BottomBar",
       routes: {
         '/SP': (context) => const SplashScreen(),
         '/SingIn': (context) => const SingInScreen(),
@@ -37,7 +38,7 @@ class _MyAppState extends State<MyApp> {
         '/Home': (context) => const HomeScreen(),
         '/Search': (context) => const SearchScreen(),
         '/Download': (context) => const DownloadScreen(),
-        '/Profile': (context) => ProfileScreen(ctx: context,),
+        '/Profile': (context) => const ProfileScreen(),
       },
     );
   }

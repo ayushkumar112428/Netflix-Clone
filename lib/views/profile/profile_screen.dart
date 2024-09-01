@@ -4,8 +4,8 @@ import 'package:netflixclone/declaration/textstyle.dart';
 import 'package:netflixclone/widget/profile_card.dart';
 
 class ProfileScreen extends StatefulWidget {
-  final BuildContext ctx;
-  const ProfileScreen({super.key, required this.ctx});
+  // final BuildContext ctx;
+  const ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -134,7 +134,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 30),
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(widget.ctx, "/SingIn");
+                // Navigator.pushNamed("/SingIn");
+                Navigator.pushReplacementNamed(context, "/SingIn");
               },
               child: Text(
                 "Sign Out",
