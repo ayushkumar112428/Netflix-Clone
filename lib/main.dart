@@ -6,6 +6,7 @@ import 'package:netflixclone/views/download/download_screen.dart';
 import 'package:netflixclone/views/home/home_screen.dart';
 import 'package:netflixclone/views/profile/profile_screen.dart';
 import 'package:netflixclone/views/search/search_screen.dart';
+import 'package:netflixclone/views/show_page/movie_screen.dart';
 import 'package:netflixclone/views/splash_screen.dart';
 
 void main() {
@@ -39,6 +40,7 @@ class _MyAppState extends State<MyApp> {
         '/Search': (context) => const SearchScreen(),
         '/Download': (context) => const DownloadScreen(),
         '/Profile': (context) => const ProfileScreen(),
+        '/Movie': (context) => const MovieScreen(),
       },
     );
   }

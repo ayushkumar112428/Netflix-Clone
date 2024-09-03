@@ -11,6 +11,7 @@ class AppColors {
   static const Color grayColor = Color(0xFF737373);
   static const Color deepPurpleText = Color(0xFF543BED);
   static const Color blueText = Color(0xFF625ec6);
+  static const Color boxBlackColor = Color(0xFF2c2c2c);
 
   Gradient homeImageTopToBottom = const LinearGradient(
     colors: [

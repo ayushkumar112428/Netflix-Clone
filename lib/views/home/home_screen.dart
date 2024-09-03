@@ -118,12 +118,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 // top row movie, TV Shows, Categories
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         "Movie",
                         style: AppTextStyles.textButtonTextStyle,
@@ -155,30 +155,33 @@ class _HomeScreenState extends State<HomeScreen> {
                             title: "My List",
                             onTap: () {},
                           ),
-                          Container(
-                            width: 120,
-                            height: 45,
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            decoration: BoxDecoration(
-                              color: AppColors.white,
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  "assets/icons/play_icon.png",
-                                  height: 28,
-                                  width: 28,
-                                  fit: BoxFit.fill,
-                                ),
-                                Text(
-                                  "Play",
-                                  style: AppTextStyles.hedgingTextStyle
-                                      .copyWith(color: Colors.black),
-                                )
-                              ],
+                          InkWell(
+                            onTap: ()=> Navigator.pushNamed(context,'/Movie'),
+                            child: Container(
+                              width: 120,
+                              height: 45,
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              decoration: BoxDecoration(
+                                color: AppColors.white,
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    "assets/icons/play_icon.png",
+                                    height: 28,
+                                    width: 28,
+                                    fit: BoxFit.fill,
+                                  ),
+                                  Text(
+                                    "Play",
+                                    style: AppTextStyles.hedgingTextStyle
+                                        .copyWith(color: Colors.black),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                           IconTextOnTapColumn(
