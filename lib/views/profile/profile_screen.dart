@@ -24,7 +24,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     {
       "name": "New",
       "color": AppColors.redColor,
-    }
+    },
+    {
+      "name": "AAA",
+      "color": AppColors.deepPurpleText,
+    },
   ];
 
   @override
@@ -33,40 +37,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: Padding(
         padding: const EdgeInsets.only(left: 24, right: 10),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 0,
-                  mainAxisSpacing: 20.0,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: AppColors.blueText,
+                    borderRadius: BorderRadius.circular(6),
+                    image: const DecorationImage(
+                      image: AssetImage("assets/profileImage.jpg"),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
-                itemCount: userData.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Container(
-                        width: 60,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: userData[index]['color'],
-                          borderRadius: BorderRadius.circular(6),
-                          image: const DecorationImage(
-                            image: AssetImage("assets/profile.png"),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 3),
-                      Text(userData[index]['name']),
-                    ],
-                  );
-                },
-              ),
+                const SizedBox(height: 3),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(width: 10,),
+                    const Text("Ayush",style: AppTextStyles.titleStyle,),
+                    IconButton(onPressed: (){
+                      Navigator.pushNamed(context, "/MyNetflix");
+                    }, icon: const Icon(Icons.keyboard_arrow_down_rounded,size: 30,)),
+                  ],
+                )
+              ],
             ),
             const SizedBox(height: 20),
             Row(
@@ -104,7 +105,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               name: "My List",
               onTap: () {
                 // Handle the My List tap
-                print("My List tapped");
+                Navigator.pushNamed(context, "/MyList");
               },
             ),
             ProfileCard(

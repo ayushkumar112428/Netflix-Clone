@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/declaration/colors.dart';
 import 'package:netflixclone/declaration/textstyle.dart';
+import 'package:netflixclone/widget/image_card.dart';
 
 class DownloadScreen extends StatefulWidget {
   const DownloadScreen({super.key});
@@ -47,6 +48,7 @@ class _DownloadScreenState extends State<DownloadScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Download",style: AppTextStyles.titleStyle,),
+        backgroundColor: AppColors.black,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 7),
@@ -54,18 +56,13 @@ class _DownloadScreenState extends State<DownloadScreen> {
             itemCount: downloadData.length,
             itemBuilder: (BuildContext context, int index) {
               return Card(
+                color: AppColors.black,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 6,vertical: 6),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        width: 166.67*0.6, height: 250 * 0.55,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          image: DecorationImage(image: NetworkImage(downloadData[index]['img']),fit: BoxFit.fill),
-                        ),
-                      ),
+                      ImageCard(img: downloadData[index]['img']),
                       const SizedBox(width: 10,),
                       Expanded(
                         child: SizedBox(

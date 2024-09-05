@@ -4,6 +4,8 @@ import 'package:netflixclone/views/auth/sing_up_screen.dart';
 import 'package:netflixclone/views/bottom_bar.dart';
 import 'package:netflixclone/views/download/download_screen.dart';
 import 'package:netflixclone/views/home/home_screen.dart';
+import 'package:netflixclone/views/my_list/my_list.dart';
+import 'package:netflixclone/views/profile/my_netflix.dart';
 import 'package:netflixclone/views/profile/profile_screen.dart';
 import 'package:netflixclone/views/search/search_screen.dart';
 import 'package:netflixclone/views/show_page/movie_screen.dart';
@@ -41,6 +43,8 @@ class _MyAppState extends State<MyApp> {
         '/Download': (context) => const DownloadScreen(),
         '/Profile': (context) => const ProfileScreen(),
         '/Movie': (context) => const MovieScreen(),
+        '/MyNetflix': (context) => const MyNetflix(),
+        '/MyList': (context) => const MyList(),
       },
     );
   }

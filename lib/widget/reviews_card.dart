@@ -78,10 +78,10 @@ class ReviewsCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.subTextStyle,
                   ),
-                  const SizedBox(
-                    height: 6,
-                  ),
-                  Divider(),
+                  // const SizedBox(
+                  //   height: 6,
+                  // ),
+                  // Divider(),
                 ],
               ),
             ),

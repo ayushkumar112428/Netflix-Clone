@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:netflixclone/declaration/colors.dart';
 import 'package:netflixclone/declaration/textstyle.dart';
+import 'package:netflixclone/widget/image_card.dart';
 import 'package:netflixclone/widget/reviews_card.dart';
 
 class MovieScreen extends StatefulWidget {
@@ -15,6 +16,9 @@ class _MovieScreenState extends State<MovieScreen> {
   bool myList = false;
   bool like = false;
   String movieName = "Deadpool & Wolverine";
+  String movieReleaseDate = "2024-07-24";
+  double movieRating = 7.8;
+  int displayedReviewItemCount = 10;
 
   // timestamp
   late String timestamp;
@@ -2247,6 +2251,8 @@ class _MovieScreenState extends State<MovieScreen> {
     formattedDate = DateFormat('yyyy-MM-dd').format(parsedDate);
   }
 
+  late List listOfMovieResults = movieDetails['results'];
+  late int totalItemCount = listOfMovieResults.length;
   @override
   void initState() {
     super.initState();
@@ -2255,22 +2261,41 @@ class _MovieScreenState extends State<MovieScreen> {
   @override
   Widget build(BuildContext context) {
     double wSize = MediaQuery.of(context).size.width;
-    double hSize = MediaQuery.of(context).size.height;
+    // double hSize = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Movie Image
-            Container(
-              width: wSize,
-              height: wSize * 0.562,
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(16),
-                      topRight: Radius.circular(16)),
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "https://image.tmdb.org/t/p/w500/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg"))),
+            const SizedBox(
+              height: 40,
+            ),
+            // Movie Image and Back Icon Buttion
+            Stack(
+              children: [
+                Container(
+                  width: wSize - 12,
+                  height: wSize * 0.7,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: const DecorationImage(
+                        image: NetworkImage(
+                            "https://image.tmdb.org/t/p/w500/yDHYTfA3R0jFYba16jBB1ef8oIt.jpg"),
+                        fit: BoxFit.fill),
+                  ),
+                ),
+                Positioned(
+                  top: 5,
+                  left: 0,
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios_new,
+                        size: 30,
+                      )),
+                )
+              ],
             ),
             const SizedBox(
               height: 10,
@@ -2284,8 +2309,8 @@ class _MovieScreenState extends State<MovieScreen> {
                   // Movie Name
                   Row(
                     children: [
-                      const Text(
-                        "Deadpool & Wolverine",
+                      Text(
+                        movieName,
                         style: AppTextStyles.titleStyle,
                       ),
                       const SizedBox(
@@ -2298,7 +2323,7 @@ class _MovieScreenState extends State<MovieScreen> {
                           color: AppColors.boxBlackColor,
                         ),
                         child: Text(
-                          "7.8",
+                          movieRating.toString(),
                           style: AppTextStyles.hedgingTextStyle
                               .copyWith(fontWeight: FontWeight.w400),
                         ),
@@ -2313,8 +2338,8 @@ class _MovieScreenState extends State<MovieScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "2024-07-24",
+                        Text(
+                          movieReleaseDate,
                           style: AppTextStyles.textStyle,
                         ),
                         const SizedBox(
@@ -2324,6 +2349,7 @@ class _MovieScreenState extends State<MovieScreen> {
                           "• ",
                           style: AppTextStyles.textStyle,
                         ),
+                        // Movie genres
                         Expanded(
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
@@ -2367,23 +2393,24 @@ class _MovieScreenState extends State<MovieScreen> {
                       height: 50,
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
-                        color: AppColors.submitButtonColor,
+                        color: AppColors.white,
                         borderRadius: BorderRadius.circular(6),
                       ),
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.play_arrow_rounded,
-                            size: 30,
+                            size: 44,
+                            color: AppColors.black,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 6,
                           ),
                           Text(
                             "Play",
-                            style: AppTextStyles.hedgingTextStyle,
+                            style: AppTextStyles.hedgingTextStyle.copyWith(color: AppColors.black),
                           )
                         ],
                       ),
@@ -2426,7 +2453,7 @@ class _MovieScreenState extends State<MovieScreen> {
                   ),
                   // List , Like and Send
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       InkWell(
                         onTap: () {
@@ -2434,39 +2461,43 @@ class _MovieScreenState extends State<MovieScreen> {
                             myList = !myList;
                           });
                         },
-                        child: Row(
+                        child: Column(
                           children: [
-                            myList
-                                ? const Icon(
-                                    Icons.bookmark_rounded,
+                            myList ? const Icon(
+                                    Icons.add,
                                     size: 30,
+                                    color: AppColors.blue,
                                   )
                                 : const Icon(
-                                    Icons.bookmark_outline,
+                                    Icons.add,
                                     size: 30,
                                   ),
                             const SizedBox(
                               width: 6,
                             ),
-                            const Text(
-                              "List",
-                              style: AppTextStyles.textStyle,
+                            myList ? Text(
+                              "My List",
+                              style: AppTextStyles.textStyle.copyWith(fontSize: 14,color: AppColors.blue),
+                            ) : Text(
+                              "My List",
+                              style: AppTextStyles.textStyle.copyWith(fontSize: 14),
                             ),
                           ],
                         ),
                       ),
+                      const SizedBox(width: 50,),
                       InkWell(
                         onTap: () {
                           setState(() {
                             like = !like;
                           });
                         },
-                        child: Row(
+                        child: Column(
                           children: [
-                            like
-                                ? const Icon(
+                            like ? const Icon(
                                     Icons.thumb_up,
                                     size: 30,
+                                    color: AppColors.blue,
                                   )
                                 : const Icon(
                                     Icons.thumb_up_alt_outlined,
@@ -2475,16 +2506,20 @@ class _MovieScreenState extends State<MovieScreen> {
                             const SizedBox(
                               width: 6,
                             ),
-                            const Text(
+                            like ? Text(
+                              "Like",
+                              style: AppTextStyles.textStyle.copyWith(color: AppColors.blue),
+                            ) : Text(
                               "Like",
                               style: AppTextStyles.textStyle,
                             ),
                           ],
                         ),
                       ),
+                      const SizedBox(width: 50,),
                       InkWell(
                         onTap: () {},
-                        child: const Row(
+                        child: const Column(
                           children: [
                             Icon(
                               Icons.send_rounded,
@@ -2546,14 +2581,13 @@ class _MovieScreenState extends State<MovieScreen> {
                                       return child;
                                     } else {
                                       return const Center(
-                                        child:
-                                            CircularProgressIndicator(), // Placeholder while loading
+                                        child: CircularProgressIndicator(),
                                       );
                                     }
                                   },
                                   errorBuilder: (context, error, stackTrace) {
-                                    return Image.network(
-                                      'https://i.pinimg.com/564x/f5/06/9c/f5069cb08bc57480f2c7127ac1aafd4d.jpg', // Placeholder image
+                                    return Image.asset(
+                                      "assets/userImageNotFound.jpg",
                                       width: 100,
                                       height: 100,
                                       fit: BoxFit.cover,
@@ -2627,6 +2661,7 @@ class _MovieScreenState extends State<MovieScreen> {
                   const SizedBox(
                     height: 7,
                   ),
+                  // Movie add reviews
                   InkWell(
                     onTap: () {
                       showDialog(
@@ -2636,181 +2671,133 @@ class _MovieScreenState extends State<MovieScreen> {
                           TextEditingController reviewsController =
                               TextEditingController();
                           int? selectedRating;
-
                           return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      backgroundColor: AppColors.boxBlackColor,
-      contentPadding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            "Share Your Review",
-            style: AppTextStyles.titleStyle.copyWith(fontSize: 20),
-          ),
-          SizedBox(height: 6,width: wSize-30,),
-          const Divider(color: AppColors.grayColor),
-          const SizedBox(height: 16),
-          Text(
-            "Rating : ",
-            style: AppTextStyles.textStyle.copyWith(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 8),
-          DropdownButtonFormField<int>(
-            value: selectedRating,
-            dropdownColor: AppColors.boxBlackColor,
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.grayColor),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.white),
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            items: List.generate(10, (index) => index + 1)
-                .map((rating) => DropdownMenuItem<int>(
-                      value: rating,
-                      child: Text(
-                        rating.toString(),
-                        style: AppTextStyles.textStyle,
-                      ),
-                    ))
-                .toList(),
-            onChanged: (value) {
-              selectedRating = value;
-            },
-            hint: const Text(
-              "Select Rating",
-              style: AppTextStyles.subTextStyle,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            "Review :",
-            style: AppTextStyles.textStyle.copyWith(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            controller: reviewsController,
-            decoration: InputDecoration(
-              hintText: 'Write your review here...',
-              hintStyle: AppTextStyles.subTextStyle.copyWith(color: AppColors.grayColor),
-              contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.grayColor),
-                borderRadius: BorderRadius.circular(6),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.white),
-                borderRadius: BorderRadius.circular(6),
-              ),
-            ),
-            maxLines: 4,
-          ),
-        ],
-      ),
-      actionsPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop(); // Close the dialog
-          },
-          child: const Text(
-            'Cancel',
-            style: AppTextStyles.textStyle,
-          ),
-        ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.submitButtonColor,
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
-          onPressed: () {
-            // Handle submission logic
-            Navigator.of(context).pop(); // Close the dialog after submission
-          },
-          child: const Text(
-            'Submit',
-            style:  AppTextStyles.textStyle,
-          ),
-        ),
-      ],
-    );
-                          // Dialog(
-                          //   shape: RoundedRectangleBorder(
-                          //     borderRadius: BorderRadius.circular(6),
-                          //   ),
-                          //   child: Container(
-                          //     width: wSize-24,
-                          //     height: hSize*0.4,
-                          //     padding: const EdgeInsets.all(16),
-                          //     child: Column(
-                          //       mainAxisAlignment: MainAxisAlignment.start,
-                          //       crossAxisAlignment: CrossAxisAlignment.start,
-                          //       mainAxisSize: MainAxisSize.min,
-                          //       children: [
-                          //         const Text(
-                          //           "Share Your Review",
-                          //           style: AppTextStyles.titleStyle,
-                          //         ),
-                          //         const SizedBox(height: 6),
-                          //         Divider(color: AppColors.white,),
-                          //         const SizedBox(height: 10),
-                          //         Row(
-                          //           children: [
-                          //             Text("Rating : ",style: AppTextStyles.textStyle,),
-                          //           ],
-                          //         ),
-                          //         const SizedBox(height: 10),
-                          //         Text("Review : ",style: AppTextStyles.textStyle,),
-                          //         const SizedBox(height: 10),
-                          //         TextField(
-                          //           controller: reviewsController,
-                          //           decoration: InputDecoration(
-                          //             hintText: 'Your Review',
-                          //             border: OutlineInputBorder(
-                          //               borderRadius: BorderRadius.circular(6),
-                          //             ),
-                          //           ),
-                          //           maxLines: 3,
-                          //         ),
-                          //         const Spacer(),
-                          //         Row(
-                          //           mainAxisAlignment: MainAxisAlignment.end,
-                          //           children: [
-                          //             TextButton(
-                          //               onPressed: () {
-                          //                 Navigator.of(context).pop(); // Close the dialog
-                          //               },
-                          //               child: Text(
-                          //                 'Cancel',
-                          //                 style: TextStyle(color: Colors.grey),
-                          //               ),
-                          //             ),
-                          //             const SizedBox(width: 8),
-                          //             ElevatedButton(
-                          //               onPressed: () {
-                          //                 Navigator.of(context)
-                          //                     .pop(); // Close the dialog after submission
-                          //               },
-                          //               child: Text('Submit'),
-                          //             ),
-                          //           ],
-                          //         ),
-                          //       ],
-                          //     ),
-                          //   ),
-                          // );
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            backgroundColor: AppColors.boxBlackColor,
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 24),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Share Your Review",
+                                  style: AppTextStyles.titleStyle
+                                      .copyWith(fontSize: 20),
+                                ),
+                                SizedBox(
+                                  height: 6,
+                                  width: wSize - 30,
+                                ),
+                                const Divider(color: AppColors.grayColor),
+                                const SizedBox(height: 16),
+                                Text(
+                                  "Rating : ",
+                                  style: AppTextStyles.textStyle
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 8),
+                                DropdownButtonFormField<int>(
+                                  value: selectedRating,
+                                  dropdownColor: AppColors.boxBlackColor,
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        vertical: 12, horizontal: 12),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: AppColors.grayColor),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: AppColors.white),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                  items: List.generate(10, (index) => index + 1)
+                                      .map((rating) => DropdownMenuItem<int>(
+                                            value: rating,
+                                            child: Text(
+                                              rating.toString(),
+                                              style: AppTextStyles.textStyle,
+                                            ),
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    selectedRating = value;
+                                  },
+                                  hint: const Text(
+                                    "Select Rating",
+                                    style: AppTextStyles.subTextStyle,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  "Review :",
+                                  style: AppTextStyles.textStyle
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 8),
+                                TextField(
+                                  controller: reviewsController,
+                                  decoration: InputDecoration(
+                                    hintText: 'Write your review here...',
+                                    hintStyle: AppTextStyles.subTextStyle
+                                        .copyWith(color: AppColors.grayColor),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        vertical: 12, horizontal: 12),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: AppColors.grayColor),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          color: AppColors.white),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                  ),
+                                  maxLines: 4,
+                                ),
+                              ],
+                            ),
+                            actionsPadding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pop(); // Close the dialog
+                                },
+                                child: const Text(
+                                  'Cancel',
+                                  style: AppTextStyles.textStyle,
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.submitButtonColor,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 24, vertical: 12),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  // Handle submission logic
+                                  Navigator.of(context)
+                                      .pop(); // Close the dialog after submission
+                                },
+                                child: const Text(
+                                  'Submit',
+                                  style: AppTextStyles.textStyle,
+                                ),
+                              ),
+                            ],
+                          );
                         },
                       );
                     },
@@ -2834,7 +2821,9 @@ class _MovieScreenState extends State<MovieScreen> {
                   ),
                   // Movie Reviews
                   ListView.builder(
-                    itemCount: movieDetails['results'].length,
+                    itemCount: (displayedReviewItemCount < totalItemCount)
+                        ? displayedReviewItemCount
+                        : totalItemCount,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     padding: EdgeInsets.zero, // remove top spase
@@ -2848,15 +2837,49 @@ class _MovieScreenState extends State<MovieScreen> {
                           'Unknown';
                       final content =
                           movieDetails['results'][index]['content'] ?? '';
-                      return ReviewsCard(
-                          authorName: authorName,
-                          formattedDate: formattedDate,
-                          content: content,
-                          review: review);
+                      return Column(
+                        children: [
+                          ReviewsCard(
+                              authorName: authorName,
+                              formattedDate: formattedDate,
+                              content: content,
+                              review: review),
+                          (index < displayedReviewItemCount-1) ? (index < totalItemCount-1) ? Divider() : Container() :Container(),
+                        ],
+                      );
                     },
                   ),
+                  if (displayedReviewItemCount < totalItemCount)
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          setState(() {
+                            // Increase the displayed item count by 10 more each time
+                            displayedReviewItemCount += 10;
+                          });
+                        },
+                        child: Text('Show More...',style: AppTextStyles.textStyle,),
+                      ),
+                    ),
+                    const SizedBox(
+                    height: 10,
+                  ),
+                  const Text("More Like This",style: AppTextStyles.hedgingTextStyle,),
+                  const SizedBox(height: 7,),
+                  SizedBox(
+                    height: 250 * 0.7,
+                    child: ListView.builder(
+                      itemCount: 7,
+                      padding: EdgeInsets.zero,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return const ImageCard(img: "https://image.tmdb.org/t/p/w500/oGythE98MYleE6mZlGs5oBGkux1.jpg");
+                      },
+                    ),
+                  ),
                   const SizedBox(
-                    height: 20,
+                    height: 50,
                   ),
                 ],
               ),
