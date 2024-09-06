@@ -30,7 +30,7 @@ class _MyNetflixState extends State<MyNetflix> {
   ];
   @override
   Widget build(BuildContext context) {
-    double wSize = MediaQuery.of(context).size.width;
+    // double wSize = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

@@ -97,7 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               name: "Notification",
               onTap: () {
                 // Handle the Notification tap
-                print("Notification tapped");
+                Navigator.pushNamed(context, "/Notification");
               },
             ),
             ProfileCard(

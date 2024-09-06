@@ -31,7 +31,7 @@ class _MyListState extends State<MyList> {
           },
           icon: const Icon(
             Icons.arrow_back_ios_new,
-            size: 30,
+            size: 20,
           ),
         ),
         title: const Text(
