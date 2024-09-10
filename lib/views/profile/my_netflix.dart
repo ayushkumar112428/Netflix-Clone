@@ -203,14 +203,14 @@ class _MyNetflixState extends State<MyNetflix> {
                                   border: Border.all(color: AppColors.grayColor),
                                   borderRadius: BorderRadius.circular(6),
                                 ),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.add,
                                   size: 60,
                                 ),
                               ),
                             ),
                             const SizedBox(height: 5),
-                            Text(
+                            const Text(
                               "Add Profile",
                               style: AppTextStyles.hedgingTextStyle,
                             ),

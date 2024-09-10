@@ -82,7 +82,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 IconButton(
                   onPressed: () {
                     // Handle the edit button tap
-                    print("Edit Profile tapped");
                   },
                   icon: const Icon(
                     Icons.edit,
@@ -110,10 +109,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             ProfileCard(
               icon: Icons.settings,
-              name: "App Setting",
+              name: "Setting",
               onTap: () {
                 // Handle the App Setting tap
-                print("App Setting tapped");
+                Navigator.pushNamed(context, "/AppSetting");
               },
             ),
             ProfileCard(
@@ -121,7 +120,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               name: "Account",
               onTap: () {
                 // Handle the Account tap
-                print("Account tapped");
+                Navigator.pushNamed(context, "/Account");
               },
             ),
             ProfileCard(
@@ -129,14 +128,64 @@ class _ProfileScreenState extends State<ProfileScreen> {
               name: "Help",
               onTap: () {
                 // Handle the Help tap
-                print("Help tapped");
+                Navigator.pushNamed(context, "/HelpScreen");
               },
             ),
             const SizedBox(height: 30),
             TextButton(
               onPressed: () {
                 // Navigator.pushNamed("/SingIn");
-                Navigator.pushReplacementNamed(context, "/SingIn");
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    backgroundColor: AppColors.graySearchBarColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    title: const Text(
+                      'Logout',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                    content: const Text(
+                      'Are you sure you want to logout?',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    actionsPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Cancel',
+                          style: AppTextStyles.textStyle,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Perform logout action
+                          Navigator.of(context).pop();
+                          // Navigate to the login screen
+                          Navigator.pushReplacementNamed(context, "/SingIn");
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.submitButtonColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        child: const Text(
+                          'Logout',
+                          style: AppTextStyles.textStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
               },
               child: Text(
                 "Sign Out",

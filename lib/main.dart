@@ -5,6 +5,9 @@ import 'package:netflixclone/views/bottom_bar.dart';
 import 'package:netflixclone/views/download/download_screen.dart';
 import 'package:netflixclone/views/home/home_screen.dart';
 import 'package:netflixclone/views/my_list/my_list.dart';
+import 'package:netflixclone/views/profile/account_screen.dart';
+import 'package:netflixclone/views/profile/app_setting.dart';
+import 'package:netflixclone/views/profile/help_screen.dart';
 import 'package:netflixclone/views/profile/my_netflix.dart';
 import 'package:netflixclone/views/profile/notification_screen.dart';
 import 'package:netflixclone/views/profile/profile_screen.dart';
@@ -47,6 +50,9 @@ class _MyAppState extends State<MyApp> {
         '/MyNetflix': (context) => const MyNetflix(),
         '/MyList': (context) => const MyList(),
         '/Notification': (context) => const NotificationScreen(),
+        '/AppSetting': (context) => const AppSettingsScreen(),
+        '/Account': (context) => const AccountScreen(),
+        '/HelpScreen': (context) => const HelpScreen(),
       },
     );
   }

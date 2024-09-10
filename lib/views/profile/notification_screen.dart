@@ -11,6 +11,10 @@ class NotificationScreen extends StatefulWidget {
 
 class _NotificationScreenState extends State<NotificationScreen> {
   bool allNotification = true;
+  bool newMovieRelease = true;
+  bool upcomingMovieTrailer = true;
+  bool specialOffers = true;
+  bool updateAppNotification = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +31,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
         ),
         title: const Text(
-          "Notications",
+          "Notifications",
           style: AppTextStyles.hedgingTextStyle,
         ),
         actions: [
@@ -46,52 +50,30 @@ class _NotificationScreenState extends State<NotificationScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Message Notification"),
+            const Text("Message Notification"),
             const SizedBox(
               height: 16,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Notification",
-                      style: AppTextStyles.hedgingTextStyle,
-                    ),
-                    const Text(
-                      "Allocation of all types of notifications.",
-                      style: AppTextStyles.subTextStyle,
-                    ),
-                  ],
-                ),
-                Switch(
-                  value: allNotification,
-                  onChanged: (value) {
-                    setState(() {
-                      allNotification = value;
-                    });
-                  },
-                  activeTrackColor: AppColors.green,
-                  inactiveTrackColor: AppColors.grayColor,
-                  activeColor: AppColors.white,
-                  inactiveThumbColor: AppColors.white,
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                ),
-              ],
-            ),
+            // Notification
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Expanded(
                   flex: 5,
-                  child: Text(
-                    "Notification",
-                    style: AppTextStyles.hedgingTextStyle,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Show Notification",
+                        style: AppTextStyles.hedgingTextStyle,
+                      ),
+                      Text(
+                        "Allocation of all types of notifications.",
+                        style: AppTextStyles.subTextStyle,
+                      ),
+                    ],
                   ),
                 ),
                 Expanded(
@@ -104,17 +86,189 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       });
                     },
                     activeTrackColor: AppColors.green,
-                    inactiveTrackColor: AppColors.grayColor,
+                    inactiveTrackColor: AppColors.grayBox,
                     activeColor: AppColors.white,
                     inactiveThumbColor: AppColors.white,
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
-                )
+                ),
               ],
             ),
-            const Text(
-              "Allocation of all types of notifications.",
-              style: AppTextStyles.subTextStyle,
+            const Padding(
+              padding: EdgeInsets.only(top: 6,bottom: 12),
+              child: Divider(),
+            ),
+            // New Movie Release
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Expanded(
+                  flex: 5,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "New Movie Release",
+                        style: AppTextStyles.hedgingTextStyle,
+                      ),
+                      Text(
+                        "Stay tuned! A new blockbuster has just been added to our collection.",
+                        style: AppTextStyles.subTextStyle,
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Switch(
+                    value: newMovieRelease,
+                    onChanged: (value) {
+                      setState(() {
+                        newMovieRelease = value;
+                      });
+                    },
+                    activeTrackColor: AppColors.green,
+                    inactiveTrackColor: AppColors.grayBox,
+                    activeColor: AppColors.white,
+                    inactiveThumbColor: AppColors.white,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                ),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 6,bottom: 12),
+              child: Divider(),
+            ),
+            // Upcoming Movie Trailer
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Expanded(
+                  flex: 5,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Upcoming Movie Trailer",
+                        style: AppTextStyles.hedgingTextStyle,
+                      ),
+                      Text(
+                        "Get a glimpse of the upcoming blockbuster.",
+                        style: AppTextStyles.subTextStyle,
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Switch(
+                    value: upcomingMovieTrailer,
+                    onChanged: (value) {
+                      setState(() {
+                        upcomingMovieTrailer = value;
+                      });
+                    },
+                    activeTrackColor: AppColors.green,
+                    inactiveTrackColor: AppColors.grayBox,
+                    activeColor: AppColors.white,
+                    inactiveThumbColor: AppColors.white,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                ),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 6,bottom: 12),
+              child: Divider(),
+            ),
+            // Special Offers
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Expanded(
+                  flex: 5,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Special Offers",
+                        style: AppTextStyles.hedgingTextStyle,
+                      ),
+                      Text(
+                        "Don't miss out on exclusive discounts and promotions available now.",
+                        style: AppTextStyles.subTextStyle,
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Switch(
+                    value: specialOffers,
+                    onChanged: (value) {
+                      setState(() {
+                        specialOffers = value;
+                      });
+                    },
+                    activeTrackColor: AppColors.green,
+                    inactiveTrackColor: AppColors.grayBox,
+                    activeColor: AppColors.white,
+                    inactiveThumbColor: AppColors.white,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                ),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 6,bottom: 12),
+              child: Divider(),
+            ),
+            // Update application
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Expanded(
+                  flex: 5,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Update application",
+                        style: AppTextStyles.hedgingTextStyle,
+                      ),
+                      Text(
+                        "You will receive notification about update application.",
+                        style: AppTextStyles.subTextStyle,
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Switch(
+                    value: updateAppNotification,
+                    onChanged: (value) {
+                      setState(() {
+                        updateAppNotification = value;
+                      });
+                    },
+                    activeTrackColor: AppColors.green,
+                    inactiveTrackColor: AppColors.grayBox,
+                    activeColor: AppColors.white,
+                    inactiveThumbColor: AppColors.white,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

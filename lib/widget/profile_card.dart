@@ -15,7 +15,7 @@ class ProfileCard extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Card(
-          elevation: 1,
+          elevation: 0,
           shadowColor: AppColors.white,
           surfaceTintColor: AppColors.white,
           child: Padding(

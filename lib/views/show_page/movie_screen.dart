@@ -2509,7 +2509,7 @@ class _MovieScreenState extends State<MovieScreen> {
                             like ? Text(
                               "Like",
                               style: AppTextStyles.textStyle.copyWith(color: AppColors.blue),
-                            ) : Text(
+                            ) : const Text(
                               "Like",
                               style: AppTextStyles.textStyle,
                             ),
@@ -2525,7 +2525,7 @@ class _MovieScreenState extends State<MovieScreen> {
                               Icons.send_rounded,
                               size: 30,
                             ),
-                            const SizedBox(
+                            SizedBox(
                               width: 6,
                             ),
                             Text(
@@ -2844,7 +2844,7 @@ class _MovieScreenState extends State<MovieScreen> {
                               formattedDate: formattedDate,
                               content: content,
                               review: review),
-                          (index < displayedReviewItemCount-1) ? (index < totalItemCount-1) ? Divider() : Container() :Container(),
+                          (index < displayedReviewItemCount-1) ? (index < totalItemCount-1) ? const Divider() : Container() :Container(),
                         ],
                       );
                     },
@@ -2859,7 +2859,7 @@ class _MovieScreenState extends State<MovieScreen> {
                             displayedReviewItemCount += 10;
                           });
                         },
-                        child: Text('Show More...',style: AppTextStyles.textStyle,),
+                        child: const Text('Show More...',style: AppTextStyles.textStyle,),
                       ),
                     ),
                     const SizedBox(

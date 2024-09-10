@@ -6,6 +6,7 @@ class AppColors {
   static const Color black = Color(0xFF000000);
   static const Color blue = Color(0xFF3388FF);
   static const Color green = Color(0xFF4caf50);
+  static const Color grayBox = Color(0xFF938f99);
   static const Color redColor = Color(0xFFE40100);
   static const Color submitButtonColor = Color(0xFFE40100);
   static const Color errorColor = Color(0xFFFF0000);
