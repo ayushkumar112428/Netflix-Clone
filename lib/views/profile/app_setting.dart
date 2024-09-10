@@ -38,10 +38,7 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
             subtitle: const Text('View and update your profile information'),
             onTap: () {
               // Navigate to the profile page
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
-              );
+              Navigator.pushNamed(context, "/ProfileUpdate");
             },
           ),
           const Divider(),
@@ -53,10 +50,7 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
             subtitle: const Text('Update your password'),
             onTap: () {
               // Navigate to the change password page
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ChangePasswordPage()),
-              );
+              Navigator.pushNamed(context, "/ChangePassword");
             },
           ),
           const Divider(),
@@ -68,10 +62,7 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
             subtitle: const Text('Choose light or dark mode'),
             onTap: () {
               // Navigate to the theme settings page
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ThemeSettingsPage()),
-              );
+              Navigator.pushNamed(context, "/AppTheme");
             },
           ),
           const Divider(),
@@ -158,57 +149,6 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
   }
 }
 
-// Placeholder for ProfilePage
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
-      body: const Center(
-        child: Text('Profile details go here.'),
-      ),
-    );
-  }
-}
-
-// Placeholder for ChangePasswordPage
-class ChangePasswordPage extends StatelessWidget {
-  const ChangePasswordPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Change Password'),
-      ),
-      body: const Center(
-        child: Text('Change Password functionality goes here.'),
-      ),
-    );
-  }
-}
-
-// Placeholder for ThemeSettingsPage
-class ThemeSettingsPage extends StatelessWidget {
-  const ThemeSettingsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('App Theme'),
-      ),
-      body: const Center(
-        child: Text('Theme selection functionality goes here.'),
-      ),
-    );
-  }
-}
-
 // Placeholder for LanguageSettingsPage
 class LanguageSettingsPage extends StatelessWidget {
   const LanguageSettingsPage({super.key});
@@ -217,6 +157,18 @@ class LanguageSettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: AppColors.black,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            size: 20,
+            color: AppColors.white,
+          ),
+        ),
         title: const Text('Language'),
       ),
       body: const Center(

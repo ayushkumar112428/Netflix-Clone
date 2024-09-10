@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflixclone/declaration/colors.dart';
+import 'package:netflixclone/declaration/textstyle.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
@@ -38,7 +39,8 @@ class _AccountScreenState extends State<AccountScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfileInformationPage()),
+                MaterialPageRoute(
+                    builder: (context) => const ProfileInformationPage()),
               );
             },
           ),
@@ -52,7 +54,8 @@ class _AccountScreenState extends State<AccountScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SubscriptionPlanPage()),
+                MaterialPageRoute(
+                    builder: (context) => const SubscriptionPlanPage()),
               );
             },
           ),
@@ -66,7 +69,8 @@ class _AccountScreenState extends State<AccountScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const PaymentHistoryPage()),
+                MaterialPageRoute(
+                    builder: (context) => const PaymentHistoryPage()),
               );
             },
           ),
@@ -76,11 +80,13 @@ class _AccountScreenState extends State<AccountScreen> {
           ListTile(
             leading: const Icon(Icons.devices, color: AppColors.white,),
             title: const Text('Manage Devices'),
-            subtitle: const Text('View and manage devices connected to your account'),
+            subtitle: const Text(
+                'View and manage devices connected to your account'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ManageDevicesPage()),
+                MaterialPageRoute(
+                    builder: (context) => const ManageDevicesPage()),
               );
             },
           ),
@@ -92,80 +98,61 @@ class _AccountScreenState extends State<AccountScreen> {
             title: const Text('Logout'),
             subtitle: const Text('Sign out of your account'),
             onTap: () {
-              _showLogoutDialog(context);
+              showDialog(
+                context: context,
+                builder: (context) =>
+                    AlertDialog(
+                      backgroundColor: AppColors.graySearchBarColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      title: const Text(
+                        'Logout',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      content: const Text(
+                        'Are you sure you want to logout?',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      actionsPadding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text(
+                            'Cancel',
+                            style: AppTextStyles.textStyle,
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            // Perform logout action
+                            Navigator.of(context).pop();
+                            // Navigate to the login screen
+                            Navigator.pushReplacementNamed(context, "/SingIn");
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.submitButtonColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          child: const Text(
+                            'Logout',
+                            style: AppTextStyles.textStyle,
+                          ),
+                        ),
+                      ],
+                    ),
+              );
             },
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Method to show logout confirmation dialog
-  void _showLogoutDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        title: const Text(
-          'Logout',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-        ),
-        content: const Text(
-          'Are you sure you want to logout?',
-          style: TextStyle(
-            fontSize: 16,
-          ),
-        ),
-        actionsPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.grey[400],
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-                child: const Text(
-                  'Cancel',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // Perform logout action
-                  Navigator.of(context).pop();
-                  // Navigate to the login screen
-                  Navigator.pushReplacementNamed(context, '/login');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red[400],
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-                child: const Text(
-                  'Logout',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-            ],
           ),
         ],
       ),

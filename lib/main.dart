@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:netflixclone/views/profile/setting/app_theme_screen.dart';
+import 'package:netflixclone/views/profile/setting/change_password.dart';
 import 'package:netflixclone/views/auth/sing_in_screen.dart';
 import 'package:netflixclone/views/auth/sing_up_screen.dart';
 import 'package:netflixclone/views/bottom_bar.dart';
@@ -11,6 +13,7 @@ import 'package:netflixclone/views/profile/help_screen.dart';
 import 'package:netflixclone/views/profile/my_netflix.dart';
 import 'package:netflixclone/views/profile/notification_screen.dart';
 import 'package:netflixclone/views/profile/profile_screen.dart';
+import 'package:netflixclone/views/profile/setting/update_profile.dart';
 import 'package:netflixclone/views/search/search_screen.dart';
 import 'package:netflixclone/views/show_page/movie_screen.dart';
 import 'package:netflixclone/views/splash_screen.dart';
@@ -42,17 +45,24 @@ class _MyAppState extends State<MyApp> {
         '/SingIn': (context) => const SingInScreen(),
         '/SingUp': (context) => const SingUpScreen(),
         '/BottomBar': (context) => const BottomBar(),
+        // BottomBar
         '/Home': (context) => const HomeScreen(),
         '/Search': (context) => const SearchScreen(),
         '/Download': (context) => const DownloadScreen(),
         '/Profile': (context) => const ProfileScreen(),
+        // Home
         '/Movie': (context) => const MovieScreen(),
+        // Profile
         '/MyNetflix': (context) => const MyNetflix(),
-        '/MyList': (context) => const MyList(),
         '/Notification': (context) => const NotificationScreen(),
+        '/MyList': (context) => const MyList(),
         '/AppSetting': (context) => const AppSettingsScreen(),
         '/Account': (context) => const AccountScreen(),
         '/HelpScreen': (context) => const HelpScreen(),
+        // Profile - Setting
+        '/ProfileUpdate': (context) => const ProfileUpdateScreen(),
+        '/ChangePassword': (context) => const ChangePasswordScreen(),
+        '/AppTheme': (context) => const AppThemeScreen(),
       },
     );
   }
