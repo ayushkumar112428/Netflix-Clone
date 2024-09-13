@@ -34,6 +34,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           "Notifications",
           style: AppTextStyles.hedgingTextStyle,
         ),
+        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {},

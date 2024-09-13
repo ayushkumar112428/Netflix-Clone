@@ -65,6 +65,7 @@ flutter:
     - assets/icons/
     - assets/netflix/
     - assets/
+    - assets/displayMessageIcon/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -78,11 +79,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+  fonts:
+    - family: primary-font-family
+      fonts:
+        - asset: myfonts/SanFranciscoPro/SFPRODISPLAYMEDIUM.OTF
+        - asset: myfonts/SanFranciscoPro/SFPRODISPLAYBOLD.OTF
+        - asset: myfonts/SanFranciscoPro/SFPRODISPLAYULTRALIGHTITALIC.OTF
+          weight: 700
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

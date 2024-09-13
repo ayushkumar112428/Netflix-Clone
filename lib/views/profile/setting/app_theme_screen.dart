@@ -35,6 +35,7 @@ class _AppThemeScreenState extends State<AppThemeScreen> {
           ),
         ),
         title: const Text('App Theme'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

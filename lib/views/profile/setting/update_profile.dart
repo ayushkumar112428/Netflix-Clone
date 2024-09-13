@@ -40,7 +40,7 @@ class _ProfileUpdateScreenState extends State<ProfileUpdateScreen> {
     if (_formKey.currentState!.validate()) {
       // Save the updated profile information
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Profile updated successfully')),
+        const SnackBar(content: Text('Profile updated successfully')),
       );
     }
   }
@@ -62,6 +62,7 @@ class _ProfileUpdateScreenState extends State<ProfileUpdateScreen> {
           ),
         ),
         title: const Text('Profile'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

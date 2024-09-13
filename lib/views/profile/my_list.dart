@@ -38,15 +38,16 @@ class _MyListState extends State<MyList> {
           "My List",
           style: AppTextStyles.hedgingTextStyle,
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.edit,
-              size: 30,
-            ),
-          ),
-        ],
+        centerTitle: true,
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {},
+        //     icon: const Icon(
+        //       Icons.edit,
+        //       size: 30,
+        //     ),
+        //   ),
+        // ],
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -27,6 +27,7 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
           ),
         ),
         title: const Text('Settings'),
+        centerTitle: true,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),

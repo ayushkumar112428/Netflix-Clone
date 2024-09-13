@@ -70,26 +70,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  "Manage Profile",
-                  style: AppTextStyles.titleStyle,
-                ),
-                const SizedBox(width: 10),
-                IconButton(
-                  onPressed: () {
-                    // Handle the edit button tap
-                  },
-                  icon: const Icon(
-                    Icons.edit,
-                    size: 30,
-                  ),
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   children: [
+            //     const Text(
+            //       "Manage Profile",
+            //       style: AppTextStyles.titleStyle,
+            //     ),
+            //     const SizedBox(width: 10),
+            //     IconButton(
+            //       onPressed: () {
+            //         // Handle the edit button tap
+            //       },
+            //       icon: const Icon(
+            //         Icons.edit,
+            //         size: 30,
+            //       ),
+            //     ),
+            //   ],
+            // ),
             const SizedBox(height: 20),
             ProfileCard(
               icon: Icons.notifications_active,

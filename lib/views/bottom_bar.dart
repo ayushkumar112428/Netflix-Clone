@@ -22,6 +22,17 @@ class _BottomBarState extends State<BottomBar> {
   ];
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final Map<String, dynamic>? args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    if (args != null && args['index'] != null) {
+      setState(() {
+        _currentIndex = args['index'];
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_currentIndex],

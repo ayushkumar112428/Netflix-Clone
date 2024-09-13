@@ -27,6 +27,7 @@ class _AccountScreenState extends State<AccountScreen> {
           ),
         ),
         title: const Text('Account Management'),
+        centerTitle: true,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
@@ -37,11 +38,19 @@ class _AccountScreenState extends State<AccountScreen> {
             title: const Text('Profile Information'),
             subtitle: const Text('Update your profile details'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const ProfileInformationPage()),
-              );
+              Navigator.pushNamed(context, "/Demo");
+            },
+          ),
+          const Divider(),
+
+          // Change Password Section
+          ListTile(
+            leading: const Icon(Icons.lock,color: AppColors.white,),
+            title: const Text('Change Password'),
+            subtitle: const Text('Update your password'),
+            onTap: () {
+              // Navigate to the change password page
+              Navigator.pushNamed(context, "/ChangePassword");
             },
           ),
           const Divider(),
@@ -52,11 +61,7 @@ class _AccountScreenState extends State<AccountScreen> {
             title: const Text('Subscription Plan'),
             subtitle: const Text('View or change your subscription plan'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const SubscriptionPlanPage()),
-              );
+              Navigator.pushNamed(context, "/SubscriptionPlan");
             },
           ),
           const Divider(),
@@ -67,11 +72,7 @@ class _AccountScreenState extends State<AccountScreen> {
             title: const Text('Payment History'),
             subtitle: const Text('View your payment history'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const PaymentHistoryPage()),
-              );
+              Navigator.pushNamed(context, "/PaymentHistory");
             },
           ),
           const Divider(),
@@ -83,11 +84,7 @@ class _AccountScreenState extends State<AccountScreen> {
             subtitle: const Text(
                 'View and manage devices connected to your account'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const ManageDevicesPage()),
-              );
+              Navigator.pushNamed(context, "/ManageDevices");
             },
           ),
           const Divider(),
@@ -155,74 +152,6 @@ class _AccountScreenState extends State<AccountScreen> {
             },
           ),
         ],
-      ),
-    );
-  }
-}
-
-// Placeholder for ProfileInformationPage
-class ProfileInformationPage extends StatelessWidget {
-  const ProfileInformationPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile Information'),
-      ),
-      body: const Center(
-        child: Text('Update your profile information here.'),
-      ),
-    );
-  }
-}
-
-// Placeholder for SubscriptionPlanPage
-class SubscriptionPlanPage extends StatelessWidget {
-  const SubscriptionPlanPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Subscription Plan'),
-      ),
-      body: const Center(
-        child: Text('View or change your subscription plan here.'),
-      ),
-    );
-  }
-}
-
-// Placeholder for PaymentHistoryPage
-class PaymentHistoryPage extends StatelessWidget {
-  const PaymentHistoryPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Payment History'),
-      ),
-      body: const Center(
-        child: Text('View your payment history here.'),
-      ),
-    );
-  }
-}
-
-// Placeholder for ManageDevicesPage
-class ManageDevicesPage extends StatelessWidget {
-  const ManageDevicesPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Manage Devices'),
-      ),
-      body: const Center(
-        child: Text('Manage devices connected to your account here.'),
       ),
     );
   }
