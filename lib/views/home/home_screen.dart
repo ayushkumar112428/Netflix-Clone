@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:netflixclone/api/api_call.dart';
+import 'package:netflixclone/api/url.dart';
 import 'package:netflixclone/declaration/colors.dart';
 import 'package:netflixclone/declaration/textstyle.dart';
+import 'package:netflixclone/models/popular_movie_model.dart';
 import 'package:netflixclone/widget/icon_text_ontap_column.dart';
 import 'package:netflixclone/widget/image_card.dart';
 
@@ -12,6 +15,33 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  PopularMovieModel? _popularMovies;
+  bool _isLoading = true;
+
+  // Method to call the API service and load popular movies
+  Future<void> loadPopularMovies(String url) async {
+    ApiCall apiCall = ApiCall();
+    try {
+      final movies = await apiCall.fetchPopularMovies(url);
+      print("Movie: $movies");
+      setState(() {
+        _popularMovies = movies;
+        _isLoading = false;
+      });
+      print("Data: $_popularMovies");
+    } catch (e) {
+      print('Error loading movies: $e');
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadPopularMovies(popularMovieUrl);
+  }
   @override
   Widget build(BuildContext context) {
     double wSize = MediaQuery.of(context).size.width;
