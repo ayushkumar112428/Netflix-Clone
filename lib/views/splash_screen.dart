@@ -1,6 +1,4 @@
-import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:netflixclone/views/auth/sing_in_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,12 +10,23 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
 
   @override
+  void initState() {
+    super.initState();
+    // Simulate a delay for the splash screen
+    Future.delayed(const Duration(seconds: 2), () {
+      // Navigate to the next screen after the delay
+      Navigator.pushNamed(context, 'SingIn');
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => const SingInScreen()),
+      // );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return FlutterSplashScreen(
-      useImmersiveMode: true,
-      duration: const Duration(seconds: 2),
-      nextScreen: const SingInScreen(),
-      splashScreenBody: Center(
+    return Scaffold(
+      body: Center(
         child: Image.asset(
           "assets/netflix/netflixisplashicon.gif",
         ),
