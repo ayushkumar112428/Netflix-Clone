@@ -4,6 +4,7 @@ import 'package:netflixclone/api/url.dart';
 import 'package:netflixclone/declaration/colors.dart';
 import 'package:netflixclone/declaration/textstyle.dart';
 import 'package:netflixclone/models/movie_model.dart';
+import 'package:netflixclone/models/tv_movie_model.dart';
 import 'package:netflixclone/models/tv_show_model.dart';
 import 'package:netflixclone/widget/icon_text_ontap_column.dart';
 import 'package:netflixclone/widget/image_card.dart';
@@ -20,6 +21,9 @@ class _HomeScreenState extends State<HomeScreen> {
   List<TvShowResult>? _popularTvShow;
   List<MovieResult>? _topRatedMovies;
   List<MovieResult>? _upcomingMovies;
+  List<TvAndMovieResult>? _trendingTvAndMovies;
+  List<TvShowResult>? _airingTodayTvShow;
+  List<TvShowResult>? _topRatedTvShow;
   bool _isLoading = true;
 
   // Method to call the API service and load popular movies
@@ -60,18 +64,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   // Method to call the API service and load top rated movies
   Future<void> loadTopRatedMovies(String url) async {
-    // print(url);
     ApiCall apiCall = ApiCall();
     try {
       final movies = await apiCall.fetchMovies(url);
-      // print("Movie: ${movies.results}");
       setState(() {
         _topRatedMovies = movies.results;
         _isLoading = false;
       });
-      // print("popularMovies: $_popularMovies");
     } catch (e) {
-      // print('Error loading movies: $e');
       setState(() {
         _isLoading = false;
       });
@@ -82,14 +82,59 @@ class _HomeScreenState extends State<HomeScreen> {
     ApiCall apiCall = ApiCall();
     try {
       final movies = await apiCall.fetchMovies(url);
-      // print("Movie: ${movies.results}");
       setState(() {
         _upcomingMovies = movies.results;
         _isLoading = false;
       });
-      // print("popularMovies: _upcomingMovies");
     } catch (e) {
-      // print('Error loading movies: $e');
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  // Method to call the API service and load trending tv and movies
+  Future<void> loadTrendingTvAndMovies(String url) async {
+    ApiCall apiCall = ApiCall();
+    try {
+      final movies = await apiCall.fetchTvAndMovies(url);
+      setState(() {
+        _trendingTvAndMovies = movies.results.cast<TvAndMovieResult>();
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  // Method to call the API service and load airing today tv show
+  Future<void> loadAiringTodayTvShow(String url) async {
+    ApiCall apiCall = ApiCall();
+    try {
+      final tv = await apiCall.fetchTvShow(url);
+      setState(() {
+        _airingTodayTvShow = tv.results;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  // Method to call the API service and load airing today tv show
+  Future<void> loadTopRatedTvShow(String url) async {
+    ApiCall apiCall = ApiCall();
+    try {
+      final tv = await apiCall.fetchTvShow(url);
+      setState(() {
+        _topRatedTvShow = tv.results;
+        _isLoading = false;
+      });
+    } catch (e) {
       setState(() {
         _isLoading = false;
       });
@@ -103,6 +148,9 @@ class _HomeScreenState extends State<HomeScreen> {
     loadPopularTvShow(popularTVShowUrl);
     loadTopRatedMovies(topRatedMovieUrl);
     loadUpcomingMovies(upcomingMovieUrl);
+    loadTrendingTvAndMovies(trendingTvAndMovieUrl);
+    loadAiringTodayTvShow(airingTodayTvShowUrl);
+    loadTopRatedTvShow(topRatedTvShowUrl);
   }
 
   @override
@@ -357,10 +405,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: 250 * 0.7,
                   child: ListView.builder(
-                    itemCount: _topRatedMovies?.length ?? 0,
+                    itemCount: _trendingTvAndMovies?.length ?? 0,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      final movie = _topRatedMovies![index];
+                      final movie = _trendingTvAndMovies![index];
                       return ImageCard(
                         img: "$imageUrl${movie.posterPath}",
                       );
@@ -373,10 +421,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: 250 * 0.7,
                   child: ListView.builder(
-                    itemCount: _topRatedMovies?.length ?? 0,
+                    itemCount: _airingTodayTvShow?.length ?? 0,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      final movie = _topRatedMovies![index];
+                      final movie = _airingTodayTvShow![index];
                       return ImageCard(
                         img: "$imageUrl${movie.posterPath}",
                       );
@@ -385,6 +433,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 10),
                 const Text("Top Rated TV Series", style: AppTextStyles.hedgingTextStyle),
+                SizedBox(
+                  height: 250 * 0.7,
+                  child: ListView.builder(
+                    itemCount: _topRatedTvShow?.length ?? 0,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      final movie = _topRatedTvShow![index];
+                      return ImageCard(
+                        img: "$imageUrl${movie.posterPath}",
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),

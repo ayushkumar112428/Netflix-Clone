@@ -25,6 +25,7 @@ import 'package:netflixclone/views/show_page/movie_screen.dart';
 import 'package:netflixclone/views/splash_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

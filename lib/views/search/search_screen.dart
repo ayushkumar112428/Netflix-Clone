@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:netflixclone/api/api_call.dart';
+import 'package:netflixclone/api/url.dart';
 import 'package:netflixclone/declaration/colors.dart';
 import 'package:netflixclone/declaration/textstyle.dart';
+import 'package:netflixclone/models/movie_model.dart';
 import 'package:netflixclone/widget/image_card.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -12,6 +15,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
+  List<MovieResult>? _popularMovies;
 
   List<String> searchListOfData = [
     "https://image.tmdb.org/t/p/w500/e5ZqqPlhKstzB4geibpZh38w7Pq.jpg",
@@ -33,6 +37,31 @@ class _SearchScreenState extends State<SearchScreen> {
     "https://image.tmdb.org/t/p/w500/b33nnKl1GSFbao4l3fZDDqsMx0F.jpg",
     "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
   ];
+
+  // Method to call the API service and load popular movies
+  Future<void> loadPopularMovies(String url) async {
+    ApiCall apiCall = ApiCall();
+    try {
+      final movies = await apiCall.fetchMovies(url);
+      // print("Movie: ${movies.results}");
+      setState(() {
+        _popularMovies = movies.results;
+        // _isLoading = false;
+      });
+      // print("popularMovies: $_popularMovies");
+    } catch (e) {
+      // print('Error loading movies: $e');
+      // setState(() {
+      //   _isLoading = false;
+      // });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadPopularMovies(popularMovieUrl);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,10 +165,11 @@ class _SearchScreenState extends State<SearchScreen> {
                   crossAxisSpacing: 0, // Space between columns
                   mainAxisSpacing: 20.0, // Space between rows
                 ),
-                itemCount: searchListOfData.length, // Set item count to the length of the list
+                itemCount: _popularMovies?.length ?? 0, // Set item count to the length of the list
                 itemBuilder: (context, index) {
+                  final movie = _popularMovies![index];
                   return ImageCard(
-                    img: searchListOfData[index], // Dynamically load images from the list
+                    img: "$imageUrl${movie.posterPath}", // Dynamically load images from the list
                   );
                 },
               ),
