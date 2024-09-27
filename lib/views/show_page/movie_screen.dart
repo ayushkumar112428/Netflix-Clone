@@ -13,6 +13,7 @@ class MovieScreen extends StatefulWidget {
 }
 
 class _MovieScreenState extends State<MovieScreen> {
+  bool? isMovie ;
   bool myList = false;
   bool like = false;
   String movieName = "Deadpool & Wolverine";
@@ -2254,8 +2255,10 @@ class _MovieScreenState extends State<MovieScreen> {
   late List listOfMovieResults = movieDetails['results'];
   late int totalItemCount = listOfMovieResults.length;
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() async {
+    Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+
+    super.didChangeDependencies();
   }
 
   @override

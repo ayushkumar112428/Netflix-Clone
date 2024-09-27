@@ -3,9 +3,7 @@ import 'package:netflixclone/api/api_call.dart';
 import 'package:netflixclone/api/url.dart';
 import 'package:netflixclone/declaration/colors.dart';
 import 'package:netflixclone/declaration/textstyle.dart';
-import 'package:netflixclone/models/movie_model.dart';
 import 'package:netflixclone/models/tv_movie_model.dart';
-import 'package:netflixclone/models/tv_show_model.dart';
 import 'package:netflixclone/widget/icon_text_ontap_column.dart';
 import 'package:netflixclone/widget/image_card.dart';
 
@@ -17,21 +15,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<MovieResult>? _popularMovies;
-  List<TvShowResult>? _popularTvShow;
-  List<MovieResult>? _topRatedMovies;
-  List<MovieResult>? _upcomingMovies;
+  List<TvAndMovieResult>? _popularMovies;
+  List<TvAndMovieResult>? _popularTvShow;
+  List<TvAndMovieResult>? _topRatedMovies;
+  List<TvAndMovieResult>? _upcomingMovies;
   List<TvAndMovieResult>? _trendingTvAndMovies;
-  List<TvShowResult>? _airingTodayTvShow;
-  List<TvShowResult>? _topRatedTvShow;
+  List<TvAndMovieResult>? _airingTodayTvShow;
+  List<TvAndMovieResult>? _topRatedTvShow;
   bool _isLoading = true;
 
   // Method to call the API service and load popular movies
   Future<void> loadPopularMovies(String url) async {
     ApiCall apiCall = ApiCall();
     try {
-      final movies = await apiCall.fetchMovies(url);
-      // print("Movie: ${movies.results}");
+      final movies = await apiCall.fetchTvAndMovies(url);
+      // print("Movie: ${movies.results.runtimeType}");
       setState(() {
         _popularMovies = movies.results;
         _isLoading = false;
@@ -48,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> loadPopularTvShow(String url) async {
     ApiCall apiCall = ApiCall();
     try {
-      final tv = await apiCall.fetchTvShow(url);
+      final tv = await apiCall.fetchTvAndMovies(url);
       // print("Movie: ${tv.results}");
       setState(() {
         _popularTvShow = tv.results;
@@ -66,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> loadTopRatedMovies(String url) async {
     ApiCall apiCall = ApiCall();
     try {
-      final movies = await apiCall.fetchMovies(url);
+      final movies = await apiCall.fetchTvAndMovies(url);
       setState(() {
         _topRatedMovies = movies.results;
         _isLoading = false;
@@ -81,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> loadUpcomingMovies(String url) async {
     ApiCall apiCall = ApiCall();
     try {
-      final movies = await apiCall.fetchMovies(url);
+      final movies = await apiCall.fetchTvAndMovies(url);
       setState(() {
         _upcomingMovies = movies.results;
         _isLoading = false;
@@ -113,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> loadAiringTodayTvShow(String url) async {
     ApiCall apiCall = ApiCall();
     try {
-      final tv = await apiCall.fetchTvShow(url);
+      final tv = await apiCall.fetchTvAndMovies(url);
       setState(() {
         _airingTodayTvShow = tv.results;
         _isLoading = false;
@@ -129,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> loadTopRatedTvShow(String url) async {
     ApiCall apiCall = ApiCall();
     try {
-      final tv = await apiCall.fetchTvShow(url);
+      final tv = await apiCall.fetchTvAndMovies(url);
       setState(() {
         _topRatedTvShow = tv.results;
         _isLoading = false;
@@ -143,7 +141,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    super.initState();
     loadPopularMovies(popularMovieUrl);
     loadPopularTvShow(popularTVShowUrl);
     loadTopRatedMovies(topRatedMovieUrl);
@@ -151,6 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
     loadTrendingTvAndMovies(trendingTvAndMovieUrl);
     loadAiringTodayTvShow(airingTodayTvShowUrl);
     loadTopRatedTvShow(topRatedTvShowUrl);
+    super.initState();
   }
 
   @override
@@ -345,8 +343,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       final movie = _popularMovies![index];
-                      return ImageCard(
-                        img: "$imageUrl${movie.posterPath}", // Fixed URL to use movie poster path
+                      return InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, '/Movie',arguments: {"data":movie});
+                        },
+                        child: ImageCard(
+                          img: "$imageUrl${movie.posterPath}", // Fixed URL to use movie poster path
+                        ),
                       );
                     },
                   ),

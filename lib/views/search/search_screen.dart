@@ -4,6 +4,7 @@ import 'package:netflixclone/api/url.dart';
 import 'package:netflixclone/declaration/colors.dart';
 import 'package:netflixclone/declaration/textstyle.dart';
 import 'package:netflixclone/models/movie_model.dart';
+import 'package:netflixclone/models/tv_movie_model.dart';
 import 'package:netflixclone/widget/image_card.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _searchController = TextEditingController();
-  List<MovieResult>? _popularMovies;
+  List<TvAndMovieResult>? _popularMovies;
 
   List<String> searchListOfData = [
     "https://image.tmdb.org/t/p/w500/e5ZqqPlhKstzB4geibpZh38w7Pq.jpg",
@@ -42,7 +43,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Future<void> loadPopularMovies(String url) async {
     ApiCall apiCall = ApiCall();
     try {
-      final movies = await apiCall.fetchMovies(url);
+      final movies = await apiCall.fetchTvAndMovies(url);
       // print("Movie: ${movies.results}");
       setState(() {
         _popularMovies = movies.results;

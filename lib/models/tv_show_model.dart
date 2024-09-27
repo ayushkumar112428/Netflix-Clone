@@ -38,7 +38,7 @@ class TvShowModel {
 
 class TvShowResult {
   bool adult;
-  String? backdropPath;
+  String backdropPath;
   List<num> genreIds;
   num id;
   List<String> originCountry;
