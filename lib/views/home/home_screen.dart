@@ -22,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<TvAndMovieResult>? _trendingTvAndMovies;
   List<TvAndMovieResult>? _airingTodayTvShow;
   List<TvAndMovieResult>? _topRatedTvShow;
+  int _carouselIndex = 0;
   bool _isLoading = true;
 
   // Method to call the API service and load popular movies
@@ -90,7 +91,6 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
   }
-
   // Method to call the API service and load trending tv and movies
   Future<void> loadTrendingTvAndMovies(String url) async {
     ApiCall apiCall = ApiCall();
@@ -106,7 +106,6 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
   }
-
   // Method to call the API service and load airing today tv show
   Future<void> loadAiringTodayTvShow(String url) async {
     ApiCall apiCall = ApiCall();
@@ -122,7 +121,6 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
   }
-
   // Method to call the API service and load airing today tv show
   Future<void> loadTopRatedTvShow(String url) async {
     ApiCall apiCall = ApiCall();
@@ -147,7 +145,6 @@ class _HomeScreenState extends State<HomeScreen> {
     loadUpcomingMovies(upcomingMovieUrl);
     loadTrendingTvAndMovies(trendingTvAndMovieUrl);
     loadAiringTodayTvShow(airingTodayTvShowUrl);
-    loadTopRatedTvShow(topRatedTvShowUrl);
     super.initState();
   }
 
@@ -199,11 +196,14 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Stack(
               children: [
                 // Image
-                SizedBox(
+                _trendingTvAndMovies==null ? SizedBox(
+                  width: wSize,
+                  height: homePageImageHeight,
+                ): SizedBox(
                   width: wSize,
                   height: homePageImageHeight,
                   child: Image.network(
-                    "https://image.tmdb.org/t/p/w500/b33nnKl1GSFbao4l3fZDDqsMx0F.jpg",
+                    "$imageUrl${_trendingTvAndMovies![_carouselIndex].posterPath}",
                     height: homePageImageHeight,
                     width: wSize,
                     fit: BoxFit.fill,
@@ -215,9 +215,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('left')),
-                          );
+                          setState(() {
+                            int index = _trendingTvAndMovies!.length ?? 0;
+                            if(_carouselIndex == 0){
+                              _carouselIndex = index-1;
+
+                            }else{
+                              _carouselIndex -= 1;
+                            }
+                          });
+                          // ScaffoldMessenger.of(context).showSnackBar(
+                          //   const SnackBar(content: Text('left')),
+                          // );
                         },
                         child: SizedBox(
                           height: homePageImageHeight,
@@ -227,9 +236,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('right')),
-                          );
+                          setState(() {
+                            int index = _trendingTvAndMovies!.length ?? 0;
+                            if(_carouselIndex == index-1){
+                              _carouselIndex = 0;
+                            }else{
+                              _carouselIndex += 1;
+                            }
+                          });
+                          // ScaffoldMessenger.of(context).showSnackBar(
+                          //   const SnackBar(content: Text('right')),
+                          // );
                         },
                         child: SizedBox(
                           height: homePageImageHeight,
@@ -287,7 +304,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: () {},
                           ),
                           InkWell(
-                            onTap: () => Navigator.pushNamed(context, '/Movie'),
+                            onTap: () => Navigator.pushNamed(context, '/Movie', arguments: {
+                              "id":_trendingTvAndMovies![_carouselIndex].id,
+                              "movie": _trendingTvAndMovies![_carouselIndex].mediaType==MediaType.MOVIE ? true : false,
+                            },),
                             child: Container(
                               width: 120,
                               height: 45,
@@ -345,7 +365,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       final movie = _popularMovies![index];
                       return InkWell(
                         onTap: (){
-                          Navigator.pushNamed(context, '/Movie',arguments: {"data":movie});
+                          Navigator.pushNamed(context, '/Movie',arguments: {
+                            "id":movie.id,
+                            "movie": true,
+                          });
                         },
                         child: ImageCard(
                           img: "$imageUrl${movie.posterPath}", // Fixed URL to use movie poster path

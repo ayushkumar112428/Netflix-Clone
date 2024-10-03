@@ -3,7 +3,6 @@ import 'package:netflixclone/api/api_call.dart';
 import 'package:netflixclone/api/url.dart';
 import 'package:netflixclone/declaration/colors.dart';
 import 'package:netflixclone/declaration/textstyle.dart';
-import 'package:netflixclone/models/movie_model.dart';
 import 'package:netflixclone/models/tv_movie_model.dart';
 import 'package:netflixclone/widget/image_card.dart';
 
