@@ -43,7 +43,7 @@ class TvAndMovieModel {
 class TvAndMovieResult {
   num id;
   bool adult;
-  List<num> genreIds;
+  List<num>? genreIds;
   String? backdropPath;
   String originalLanguage;
   String overview;
@@ -92,7 +92,7 @@ class TvAndMovieResult {
   factory TvAndMovieResult.fromJson(Map<String, dynamic> json) => TvAndMovieResult(
     id: json["id"],
     adult: json["adult"],
-    genreIds: List<num>.from(json["genre_ids"].map((x) => x)),
+    genreIds: json["genre_ids"] != null ? List<num>.from(json["genre_ids"].map((x) => x)) : null,
     backdropPath: json["backdrop_path"] ?? '',
     originalLanguage: json["original_language"],
     overview: json["overview"],
@@ -117,7 +117,7 @@ class TvAndMovieResult {
   Map<String, dynamic> toJson() => {
     "id": id,
     "adult": adult,
-    "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
+    "genre_ids": genreIds != null ? List<dynamic>.from(genreIds!.map((x) => x)) : [],
     "backdrop_path": backdropPath,
     "original_language": originalLanguage,
     "overview": overview,

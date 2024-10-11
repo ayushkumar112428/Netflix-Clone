@@ -145,6 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
     loadUpcomingMovies(upcomingMovieUrl);
     loadTrendingTvAndMovies(trendingTvAndMovieUrl);
     loadAiringTodayTvShow(airingTodayTvShowUrl);
+    loadTopRatedTvShow(topRatedTvShowUrl);
     super.initState();
   }
 
@@ -216,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: InkWell(
                         onTap: () {
                           setState(() {
-                            int index = _trendingTvAndMovies!.length ?? 0;
+                            int index = _trendingTvAndMovies!.length;
                             if(_carouselIndex == 0){
                               _carouselIndex = index-1;
 
@@ -224,9 +225,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               _carouselIndex -= 1;
                             }
                           });
-                          // ScaffoldMessenger.of(context).showSnackBar(
-                          //   const SnackBar(content: Text('left')),
-                          // );
                         },
                         child: SizedBox(
                           height: homePageImageHeight,
@@ -237,16 +235,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: InkWell(
                         onTap: () {
                           setState(() {
-                            int index = _trendingTvAndMovies!.length ?? 0;
+                            int index = _trendingTvAndMovies!.length;
                             if(_carouselIndex == index-1){
                               _carouselIndex = 0;
                             }else{
                               _carouselIndex += 1;
                             }
                           });
-                          // ScaffoldMessenger.of(context).showSnackBar(
-                          //   const SnackBar(content: Text('right')),
-                          // );
                         },
                         child: SizedBox(
                           height: homePageImageHeight,
@@ -387,8 +382,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       final tv = _popularTvShow![index];
-                      return ImageCard(
-                        img: "$imageUrl${tv.posterPath}",
+                      return InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, '/Movie',arguments: {
+                            "id":tv.id,
+                            "movie": false,
+                          });
+                        },
+                        child: ImageCard(
+                          img: "$imageUrl${tv.posterPath}",
+                        ),
                       );
                     },
                   ),
@@ -403,8 +406,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       final movie = _topRatedMovies![index];
-                      return ImageCard(
-                        img: "$imageUrl${movie.posterPath}",
+                      return InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, '/Movie',arguments: {
+                            "id":movie.id,
+                            "movie": true,
+                          });
+                        },
+                        child: ImageCard(
+                          img: "$imageUrl${movie.posterPath}",
+                        ),
                       );
                     },
                   ),
@@ -419,8 +430,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       final movie = _upcomingMovies![index];
-                      return ImageCard(
-                        img: "$imageUrl${movie.posterPath}",
+                      return InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, '/Movie',arguments: {
+                            "id":movie.id,
+                            "movie": true,
+                          });
+                        },
+                        child: ImageCard(
+                          img: "$imageUrl${movie.posterPath}",
+                        ),
                       );
                     },
                   ),
@@ -435,8 +454,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       final movie = _trendingTvAndMovies![index];
-                      return ImageCard(
-                        img: "$imageUrl${movie.posterPath}",
+                      return InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, '/Movie',arguments: {
+                            "id":movie.id,
+                            "movie": _trendingTvAndMovies![index].mediaType==MediaType.MOVIE ? true : false,
+                          });
+                        },
+                        child: ImageCard(
+                          img: "$imageUrl${movie.posterPath}",
+                        ),
                       );
                     },
                   ),
@@ -451,8 +478,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       final movie = _airingTodayTvShow![index];
-                      return ImageCard(
-                        img: "$imageUrl${movie.posterPath}",
+                      return InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, '/Movie',arguments: {
+                            "id":movie.id,
+                            "movie": false,
+                          });
+                        },
+                        child: ImageCard(
+                          img: "$imageUrl${movie.posterPath}",
+                        ),
                       );
                     },
                   ),
@@ -466,8 +501,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       final movie = _topRatedTvShow![index];
-                      return ImageCard(
-                        img: "$imageUrl${movie.posterPath}",
+                      return InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, '/Movie',arguments: {
+                            "id":movie.id,
+                            "movie": false,
+                          });
+                        },
+                        child: ImageCard(
+                          img: "$imageUrl${movie.posterPath}",
+                        ),
                       );
                     },
                   ),

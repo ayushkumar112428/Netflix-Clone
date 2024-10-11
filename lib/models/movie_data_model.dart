@@ -11,7 +11,7 @@ String movieDataModelToJson(MovieDataModel data) => json.encode(data.toJson());
 class MovieDataModel {
   bool adult;
   String backdropPath;
-  BelongsToCollection belongsToCollection;
+  BelongsToCollection? belongsToCollection;
   int budget;
   List<Genre> genres;
   String homepage;
@@ -39,7 +39,7 @@ class MovieDataModel {
   MovieDataModel({
     required this.adult,
     required this.backdropPath,
-    required this.belongsToCollection,
+    this.belongsToCollection,
     required this.budget,
     required this.genres,
     required this.homepage,
@@ -68,7 +68,7 @@ class MovieDataModel {
   factory MovieDataModel.fromJson(Map<String, dynamic> json) => MovieDataModel(
     adult: json["adult"],
     backdropPath: json["backdrop_path"],
-    belongsToCollection: BelongsToCollection.fromJson(json["belongs_to_collection"]),
+    belongsToCollection: json["belongs_to_collection"] != null ? BelongsToCollection.fromJson(json["belongs_to_collection"]) : null,
     budget: json["budget"],
     genres: List<Genre>.from(json["genres"].map((x) => Genre.fromJson(x))),
     homepage: json["homepage"],
@@ -97,7 +97,7 @@ class MovieDataModel {
   Map<String, dynamic> toJson() => {
     "adult": adult,
     "backdrop_path": backdropPath,
-    "belongs_to_collection": belongsToCollection.toJson(),
+    "belongs_to_collection": belongsToCollection,
     "budget": budget,
     "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
     "homepage": homepage,

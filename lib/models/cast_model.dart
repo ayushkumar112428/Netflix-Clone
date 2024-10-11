@@ -36,7 +36,7 @@ class Cast {
   bool adult;
   int gender;
   int id;
-  Department knownForDepartment;
+  Department? knownForDepartment;
   String name;
   String originalName;
   double popularity;
@@ -52,11 +52,11 @@ class Cast {
     required this.adult,
     required this.gender,
     required this.id,
-    required this.knownForDepartment,
+    this.knownForDepartment,
     required this.name,
     required this.originalName,
     required this.popularity,
-    required this.profilePath,
+    this.profilePath,
     this.castId,
     this.character,
     required this.creditId,
@@ -66,19 +66,23 @@ class Cast {
   });
 
   factory Cast.fromJson(Map<String, dynamic> json) => Cast(
-    adult: json["adult"],
+    adult: json["adult"] ?? false,
     gender: json["gender"],
     id: json["id"],
-    knownForDepartment: departmentValues.map[json["known_for_department"]]!,
+    knownForDepartment: json["known_for_department"] != null
+        ? departmentValues.map[json["known_for_department"]]
+        : null, // Handle null for known_for_department
     name: json["name"],
     originalName: json["original_name"],
-    popularity: json["popularity"]?.toDouble(),
+    popularity: json["popularity"]?.toDouble() ?? 0.0,
     profilePath: json["profile_path"],
     castId: json["cast_id"],
     character: json["character"],
     creditId: json["credit_id"],
     order: json["order"],
-    department: departmentValues.map[json["department"]]!,
+    department: json["department"] != null
+        ? departmentValues.map[json["department"]]
+        : null,
     job: json["job"],
   );
 
@@ -100,12 +104,12 @@ class Cast {
   };
 }
 
+
 enum Department {
   ACTING,
   ART,
   CAMERA,
   COSTUME_MAKE_UP,
-  CREATOR,
   CREW,
   DIRECTING,
   EDITING,
@@ -121,7 +125,6 @@ final departmentValues = EnumValues({
   "Art": Department.ART,
   "Camera": Department.CAMERA,
   "Costume & Make-Up": Department.COSTUME_MAKE_UP,
-  "Creator": Department.CREATOR,
   "Crew": Department.CREW,
   "Directing": Department.DIRECTING,
   "Editing": Department.EDITING,
